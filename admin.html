@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel DK Service</title>
+<style>
+  :root { --navy:#0B192C; --blue:#1E3A8A; --cyan:#00B4D8; --bg:#f1f5f9; --line:#e2e8f0; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Inter, system-ui, sans-serif; background:var(--bg); color:#0f172a; }
+  .hidden { display:none !important; }
+  .login { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; background:linear-gradient(135deg,#0B192C,#1E3A8A 60%,#00B4D8); }
+  .login form { background:#fff; padding:32px; border-radius:20px; width:100%; max-width:380px; box-shadow:0 20px 50px rgba(0,0,0,.3); }
+  .login h1 { margin:0 0 4px; font-size:22px; color:var(--navy); }
+  .login p { margin:0 0 20px; color:#64748b; font-size:14px; }
+  label { display:block; font-size:13px; font-weight:600; margin:0 0 6px; color:#334155; }
+  input[type=text], input[type=email], input[type=password], input[type=url], textarea {
+    width:100%; padding:11px 12px; border:1px solid #cbd5e1; border-radius:10px; font:inherit; font-size:14px; background:#fff; }
+  input:focus, textarea:focus { outline:2px solid var(--cyan); border-color:var(--cyan); }
+  textarea { min-height:90px; resize:vertical; }
+  .btn { border:0; padding:11px 18px; border-radius:10px; font-weight:700; cursor:pointer; font-size:14px; }
+  .btn-primary { background:var(--navy); color:#fff; } .btn-primary:hover { background:var(--blue); }
+  .btn-save { background:#16a34a; color:#fff; } .btn-save:hover { background:#15803d; }
+  .btn-ghost { background:#e2e8f0; color:#334155; }
+  .btn-sm { padding:6px 10px; font-size:12px; border-radius:8px; }
+  .err { color:#dc2626; font-size:13px; margin-top:10px; min-height:18px; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 20px; flex-wrap:wrap; }
+  header.top h2 { margin:0; font-size:17px; }
+  header.top .actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .status { font-size:13px; color:#a5f3fc; }
+  main { max-width:900px; margin:0 auto; padding:20px; }
+  .tip { background:#e0f2fe; border:1px solid #bae6fd; color:#075985; padding:12px 14px; border-radius:12px; font-size:13px; margin-bottom:16px; }
+  details.grp { background:#fff; border:1px solid var(--line); border-radius:16px; margin-bottom:14px; overflow:hidden; }
+  details.grp > summary { cursor:pointer; padding:16px 18px; font-weight:800; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+  details.grp > summary::after { content:'+'; font-size:20px; color:#64748b; }
+  details.grp[open] > summary::after { content:'–'; }
+  .fields { padding:4px 18px 18px; display:grid; gap:16px; }
+  .field .row { display:flex; gap:8px; align-items:center; }
+  .field .row > input, .field .row > textarea { flex:1; }
+  .field.changed input, .field.changed textarea { border-color:#f59e0b; background:#fffbeb; }
+  .imgbox { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .imgbox img { width:140px; height:90px; object-fit:contain; background:#e2e8f0; border-radius:10px; border:1px solid var(--line); }
+  .small { font-size:12px; color:#64748b; margin-top:4px; }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0f172a; color:#fff; padding:12px 20px; border-radius:12px; font-size:14px; z-index:50; box-shadow:0 10px 30px rgba(0,0,0,.3); }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="login">
+  <form id="loginForm">
+    <h1>Painel DK Service</h1>
+    <p>Entre para editar o site.</p>
+    <label for="email">E-mail</label>
+    <input type="email" id="email" required autocomplete="username">
+    <div style="height:12px"></div>
+    <label for="senha">Senha</label>
+    <input type="password" id="senha" required autocomplete="current-password">
+    <div style="height:18px"></div>
+    <button class="btn btn-primary" style="width:100%">Entrar</button>
+    <div class="err" id="loginErr"></div>
+  </form>
+</div>
+
+<!-- PAINEL -->
+<div id="panel" class="hidden">
+  <header class="top">
+    <h2>Painel DK Service</h2>
+    <div class="actions">
+      <span class="status" id="status"></span>
+      <a href="index.html" target="_blank" class="btn btn-ghost" style="text-decoration:none">Ver site</a>
+      <button class="btn btn-save" id="saveBtn">Salvar alterações</button>
+      <button class="btn btn-ghost" id="logoutBtn">Sair</button>
+    </div>
+  </header>
+  <main>
+    <div class="tip">Edite o que quiser e clique em <b>Salvar alterações</b>. O site é atualizado na hora, sem precisar recarregar. O botão <b>Restaurar</b> volta o item ao texto/foto original. Imagens são reduzidas e salvas automaticamente.</div>
+    <div id="groups"></div>
+  </main>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, collection, onSnapshot, setDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyAY9T1msHMAtAAdRiPBNhch9IRUmnahjuk",
+  authDomain: "dkservice-d5b03.firebaseapp.com",
+  projectId: "dkservice-d5b03",
+  storageBucket: "dkservice-d5b03.firebasestorage.app",
+  messagingSenderId: "121430782968",
+  appId: "1:121430782968:web:c6daedf81add1e7d4f1c0d"
+});
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+const $ = id => document.getElementById(id);
+const toast = (msg) => { const t=$('toast'); t.textContent=msg; t.classList.remove('hidden'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.add('hidden'),3000); };
+
+// ---------- Login ----------
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault(); $('loginErr').textContent = '';
+  try { await signInWithEmailAndPassword(auth, $('email').value.trim(), $('senha').value); }
+  catch { $('loginErr').textContent = 'E-mail ou senha incorretos.'; }
+});
+$('logoutBtn').addEventListener('click', () => signOut(auth));
+
+let started = false;
+onAuthStateChanged(auth, user => {
+  $('login').classList.toggle('hidden', !!user);
+  $('panel').classList.toggle('hidden', !user);
+  if (user && !started) { started = true; init(); }
+});
+
+// ---------- Dados ----------
+let fields = [];             // [{key,type,label,group,def}]
+let savedTexts = {}, savedImgs = {};
+let pendingText = {};        // key -> novo valor
+let pendingImg = {};         // key -> dataURL
+let pendingReset = new Set();
+
+async function loadSchema() {
+  const html = await (await fetch('index.html?_=' + Date.now())).text();
+  const d = new DOMParser().parseFromString(html, 'text/html');
+  const seen = new Set();
+  d.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    if (seen.has(key) || !el.dataset.label) return;
+    seen.add(key);
+    const type = el.dataset.type || 'text';
+    let def = type === 'img' ? (el.getAttribute('src') || '') : type === 'social' ? '' : el.textContent.replace(/\s+/g, ' ').trim();
+    fields.push({ key, type, label: el.dataset.label, group: el.dataset.group || 'Outros', def });
+  });
+}
+
+function currentValue(f) {
+  if (f.type === 'img') return pendingImg[f.key] ?? savedImgs[f.key] ?? f.def;
+  return pendingText[f.key] ?? savedTexts[f.key] ?? f.def;
+}
+
+function build() {
+  const groups = {};
+  fields.forEach(f => (groups[f.group] ||= []).push(f));
+  const wrap = $('groups'); wrap.innerHTML = '';
+  Object.keys(groups).sort().forEach((g, i) => {
+    const det = document.createElement('details'); det.className = 'grp'; if (i === 0) det.open = true;
+    det.innerHTML = `<summary>${g.replace(/^\d+\.\s*/, '')}</summary><div class="fields"></div>`;
+    const box = det.querySelector('.fields');
+    groups[g].forEach(f => box.appendChild(buildField(f)));
+    wrap.appendChild(det);
+  });
+}
+
+function buildField(f) {
+  const div = document.createElement('div'); div.className = 'field'; div.dataset.key = f.key;
+  const lab = document.createElement('label'); lab.textContent = f.label; div.appendChild(lab);
+  const val = currentValue(f);
+
+  if (f.type === 'img') {
+    const box = document.createElement('div'); box.className = 'imgbox';
+    const img = document.createElement('img'); img.src = val; img.alt = ''; img.onerror = () => { img.style.opacity = .3; };
+    const file = document.createElement('input'); file.type = 'file'; file.accept = 'image/*';
+    const reset = btn('Restaurar', () => { delete pendingImg[f.key]; pendingReset.add(f.key); img.src = f.def; file.value=''; mark(div, true); });
+    file.addEventListener('change', async () => {
+      if (!file.files[0]) return;
+      try {
+        const max = f.key === 'logo' ? 600 : 1200;
+        const data = await compress(file.files[0], max);
+        pendingImg[f.key] = data; pendingReset.delete(f.key);
+        img.src = data; mark(div, true);
+      } catch { toast('Não consegui ler essa imagem.'); }
+    });
+    const right = document.createElement('div'); right.append(file, document.createElement('br'), reset);
+    right.querySelector('br').remove(); right.style.display='grid'; right.style.gap='8px';
+    box.append(img, right); div.appendChild(box);
+    const s = document.createElement('div'); s.className = 'small'; s.textContent = 'A imagem é reduzida automaticamente para ficar leve.'; div.appendChild(s);
+    return div;
+  }
+
+  const row = document.createElement('div'); row.className = 'row';
+  const long = val.length > 70;
+  const input = document.createElement(long ? 'textarea' : 'input');
+  if (!long) input.type = f.type === 'social' ? 'url' : 'text';
+  if (f.type === 'social') input.placeholder = 'https://...';
+  input.value = val;
+  input.addEventListener('input', () => {
+    pendingText[f.key] = input.value; pendingReset.delete(f.key); mark(div, true);
+  });
+  const reset = btn('Restaurar', () => {
+    delete pendingText[f.key]; pendingReset.add(f.key); input.value = f.def; mark(div, true);
+  });
+  row.append(input, reset); div.appendChild(row);
+  return div;
+}
+
+function btn(text, fn) { const b = document.createElement('button'); b.type='button'; b.className='btn btn-ghost btn-sm'; b.textContent=text; b.onclick=fn; return b; }
+function mark(div, on) { div.classList.toggle('changed', on); $('status').textContent = 'Alterações não salvas'; }
+
+// ---------- Compressão de imagem (base64) ----------
+function compress(file, maxW) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      let w = img.width, h = img.height;
+      if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      let q = 0.82, out;
+      const mime = (c.toDataURL('image/webp').startsWith('data:image/webp')) ? 'image/webp' : 'image/jpeg';
+      do { out = c.toDataURL(mime, q); q -= 0.1; } while (out.length > 800000 && q > 0.2);
+      URL.revokeObjectURL(url);
+      out.length > 950000 ? reject() : resolve(out);
+    };
+    img.onerror = reject; img.src = url;
+  });
+}
+
+// ---------- Salvar ----------
+$('saveBtn').addEventListener('click', async () => {
+  const b = $('saveBtn'); b.disabled = true; b.textContent = 'Salvando...';
+  try {
+    const textObj = { ...pendingText };
+    const keyType = Object.fromEntries(fields.map(f => [f.key, f.type]));
+    pendingReset.forEach(k => { if (keyType[k] !== 'img') textObj[k] = deleteField(); });
+    if (Object.keys(textObj).length) await setDoc(doc(db, 'dk', 'content'), textObj, { merge: true });
+    for (const [k, data] of Object.entries(pendingImg)) await setDoc(doc(db, 'dk_img', k), { data });
+    for (const k of pendingReset) if (keyType[k] === 'img') await deleteDoc(doc(db, 'dk_img', k));
+    pendingText = {}; pendingImg = {}; pendingReset = new Set();
+    document.querySelectorAll('.field.changed').forEach(el => el.classList.remove('changed'));
+    $('status').textContent = 'Tudo salvo ✓'; toast('Site atualizado!');
+  } catch (e) {
+    console.error(e); toast('Erro ao salvar. Verifique as regras do Firestore e se você está logado.');
+  }
+  b.disabled = false; b.textContent = 'Salvar alterações';
+});
+
+window.addEventListener('beforeunload', e => {
+  if (Object.keys(pendingText).length || Object.keys(pendingImg).length || pendingReset.size) { e.preventDefault(); e.returnValue = ''; }
+});
+
+// ---------- Início ----------
+async function init() {
+  try { await loadSchema(); }
+  catch { $('groups').innerHTML = '<div class="tip">Não consegui carregar o index.html. Abra o painel pelo site publicado (GitHub Pages), não direto do arquivo no computador.</div>'; return; }
+  let first = true;
+  const maybeBuild = () => { if (first && gotT && gotI) { first = false; build(); } };
+  let gotT = false, gotI = false;
+  onSnapshot(doc(db, 'dk', 'content'), s => { savedTexts = s.exists() ? s.data() : {}; gotT = true; maybeBuild(); });
+  onSnapshot(collection(db, 'dk_img'), s => { const o = {}; s.forEach(d => o[d.id] = d.data().data); savedImgs = o; gotI = true; maybeBuild(); });
+}
+</script>
+</body>
+</html>
