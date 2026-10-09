@@ -44,6 +44,20 @@
         .animate-float { animation: float-slow 4s ease-in-out infinite; }
         summary::-webkit-details-marker { display: none; }
 
+
+        /* ---------- Avaliações em carrossel infinito ---------- */
+        .dep-viewport { position: relative; overflow: hidden; padding: 44px 0; margin: -44px 0; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%); }
+        .dep-track { display: flex; width: max-content; animation: dep-scroll var(--dep-dur, 60s) linear infinite; will-change: transform; }
+        .dep-group { display: flex; flex-shrink: 0; }
+        .dep-card { width: min(340px, 82vw); margin-right: 24px; flex-shrink: 0; }
+        @keyframes dep-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (hover: hover) { .dep-viewport:hover .dep-track { animation-play-state: paused; } }
+        @media (prefers-reduced-motion: reduce) {
+            .dep-viewport { overflow-x: auto; }
+            .dep-track { animation: none; }
+            .dep-group[aria-hidden="true"] { display: none; }
+        }
+
         /* ---------- Animações ao passar o mouse nos cards ---------- */
         @media (hover: hover) and (prefers-reduced-motion: no-preference) {
             .dk-card { transition: opacity .7s ease-out, transform .7s ease-out, translate .35s cubic-bezier(.2,.8,.2,1), scale .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease !important; }
@@ -354,7 +368,7 @@
 
                 <div class="dk-card dk-line bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
                     <div>
-                        <div class="dk-icon w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl font-bold mb-6"><i class="fa-solid fa-sparkles"></i></div>
+                        <div class="dk-icon w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl font-bold mb-6"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                         <h3 data-key="dif2_t" data-group="4. Diferenciais" data-label="Card 2 - título" class="text-xl font-bold text-slate-900 mb-3">Instalação & Higienização Limpa</h3>
                         <p data-key="dif2_d" data-group="4. Diferenciais" data-label="Card 2 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Protegemos seus móveis e parede. Utilizamos bolsa colecionadora de resíduos e ferramentas com aspiração para entregar o ambiente brilhando.</p>
                     </div>
@@ -456,66 +470,19 @@
     </section>
 
     <!-- Depoimentos -->
-    <section id="depoimentos" class="py-20 bg-dk-navy text-white relative">
+    <section id="depoimentos" class="py-20 bg-dk-navy text-white relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
                 <span data-key="dep_tag" data-group="6. Avaliações" data-label="Etiqueta da seção" class="text-dk-cyan font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full inline-block mb-3">AVALIAÇÕES REAIS</span>
                 <h2 data-key="dep_titulo" data-group="6. Avaliações" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-white leading-tight">O que dizem os clientes que fecharam com a gente</h2>
                 <p data-key="dep_texto" data-group="6. Avaliações" data-label="Texto da seção" class="mt-3 text-slate-300 text-base sm:text-lg">A reputação da DK Service é construída com transparência e satisfação em cada atendimento.</p>
             </div>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                <div class="dk-card dk-line bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
-                    <div>
-                        <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p data-key="d1_txt" data-group="6. Avaliações" data-label="Avaliação 1 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"A equipe da DK Service foi extremamente atenciosa. Instalaram dois aparelhos na minha residência sem fazer um pingo de poeira. O ar tá gelando perfeitamente. Nota 10!"</p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d1_ini" data-group="6. Avaliações" data-label="Avaliação 1 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-sky-500 font-bold flex items-center justify-center text-white text-sm">M.V.</div>
-                        <div>
-                            <p data-key="d1_nome" data-group="6. Avaliações" data-label="Avaliação 1 - nome" class="font-bold text-white text-sm">Marcos Valério</p>
-                            <p data-key="d1_cargo" data-group="6. Avaliações" data-label="Avaliação 1 - complemento" class="text-xs text-slate-400">Cliente Residencial</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dk-card dk-line bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
-                    <div>
-                        <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p data-key="d2_txt" data-group="6. Avaliações" data-label="Avaliação 2 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"Chamei para fazer higienização do meu ar que estava com cheiro ruim. Fizeram a limpeza completa na bolsa coletora e o cheiro sumiu na hora. Recomendo demais!"</p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d2_ini" data-group="6. Avaliações" data-label="Avaliação 2 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-emerald-500 font-bold flex items-center justify-center text-white text-sm">C.A.</div>
-                        <div>
-                            <p data-key="d2_nome" data-group="6. Avaliações" data-label="Avaliação 2 - nome" class="font-bold text-white text-sm">Carla Andrade</p>
-                            <p data-key="d2_cargo" data-group="6. Avaliações" data-label="Avaliação 2 - complemento" class="text-xs text-slate-400">Sorocaba / SP</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dk-card dk-line bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
-                    <div>
-                        <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p data-key="d3_txt" data-group="6. Avaliações" data-label="Avaliação 3 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"Fechei a manutenção preventiva da minha clínica com eles. Atendimento rápido pelo WhatsApp, tiraram todas as dúvidas e o preço foi honesto."</p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d3_ini" data-group="6. Avaliações" data-label="Avaliação 3 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-orange-500 font-bold flex items-center justify-center text-white text-sm">R.S.</div>
-                        <div>
-                            <p data-key="d3_nome" data-group="6. Avaliações" data-label="Avaliação 3 - nome" class="font-bold text-white text-sm">Dr. Ricardo Silva</p>
-                            <p data-key="d3_cargo" data-group="6. Avaliações" data-label="Avaliação 3 - complemento" class="text-xs text-slate-400">Cliente Comercial</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <!-- Carrossel de largura total: as avaliações são editadas no painel (adicionar / remover / reordenar) -->
+        <div class="dep-viewport" id="dep-viewport">
+            <span hidden data-key="dep_lista" data-type="reviews" data-group="6. Avaliações" data-label="Avaliações - lista">[{"n": "Marcos Paulo", "c": "Cliente Residencial", "s": 5, "t": "A equipe da DK Service foi extremamente atenciosa. Instalaram dois aparelhos na minha residência sem fazer um pingo de poeira. O ar tá gelando perfeitamente. Nota 10!"}, {"n": "Carla Andrade", "c": "Cliente Residencial", "s": 5, "t": "Chamei para fazer higienização do meu ar que estava com cheiro ruim. Fizeram a limpeza completa na bolsa coletora e o cheiro sumiu na hora. Recomendo demais!"}, {"n": "Dr. Ricardo Silva", "c": "Cliente Comercial", "s": 5, "t": "Fechei a manutenção preventiva da minha clínica com eles. Atendimento rápido pelo WhatsApp, tiraram todas as dúvidas e o preço foi honesto."}, {"n": "Fernanda Lopes", "c": "Cliente Residencial", "s": 5, "t": "Pontuais, educados e deixaram tudo limpo. Meu ar-condicionado nunca gelou tão bem. Já indiquei para toda a família."}, {"n": "Roberto Almeida", "c": "Cliente Comercial", "s": 5, "t": "Contratei a manutenção do escritório inteiro. Serviço rápido, sem atrapalhar o expediente e com preço justo."}, {"n": "Juliana Mendes", "c": "Cliente Residencial", "s": 5, "t": "Explicaram tudo que estava errado antes de mexer e só cobraram o necessário. Transparência que a gente raramente encontra."}, {"n": "Paulo Henrique", "c": "Cliente Residencial", "s": 5, "t": "Instalação perfeita, tubulação bem acabada e a parede continuou intacta. Capricho em cada detalhe."}, {"n": "Mariana Costa", "c": "Cliente Comercial", "s": 5, "t": "Atendimento ágil pelo WhatsApp e visita no mesmo dia. Resolveram o problema da minha loja em poucas horas."}]</span>
+            <div class="dep-track" id="dep-track"></div>
         </div>
     </section>
 
@@ -793,12 +760,60 @@
             if (!el._obs) { el._obs = true; countIO.observe(el); }
         }
 
+        // ---- Avaliações: carrossel infinito para a esquerda ----
+        const DEP_COLORS = ['#0ea5e9','#10b981','#f97316','#8b5cf6','#ec4899','#eab308','#14b8a6','#ef4444'];
+        const DEP_TITLES = /^(dr|dra|sr|sra|prof|profa|eng)\.?$/i;
+        const depInitials = n => {
+            const w = String(n || '').trim().split(/\s+/).filter(x => x && !DEP_TITLES.test(x));
+            if (!w.length) return '?';
+            return (w.length > 1 ? w[0][0] + '.' + w[w.length - 1][0] + '.' : w[0][0] + '.').toUpperCase();
+        };
+        const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+        function depCard(r, i) {
+            const card = mk('div', 'dk-card dk-line dep-card bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between');
+            const top = mk('div');
+            const stars = mk('div', 'dk-stars flex text-amber-400 gap-1 mb-4 text-sm');
+            const n = Math.max(1, Math.min(5, parseInt(r.s) || 5));
+            for (let k = 0; k < 5; k++) stars.appendChild(mk('i', k < n ? 'fa-solid fa-star' : 'fa-regular fa-star opacity-40'));
+            top.append(stars, mk('p', 'text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6', '\u201C' + String(r.t).trim() + '\u201D'));
+            const foot = mk('div', 'flex items-center gap-3 pt-4 border-t border-slate-700');
+            const av = mk('div', 'dk-avatar w-10 h-10 rounded-full font-bold flex items-center justify-center text-white text-sm shrink-0', depInitials(r.n));
+            av.style.background = DEP_COLORS[i % DEP_COLORS.length];
+            const who = mk('div');
+            who.append(mk('p', 'font-bold text-white text-sm', r.n || ''), mk('p', 'text-xs text-slate-400', r.c || ''));
+            foot.append(av, who);
+            card.append(top, foot);
+            return card;
+        }
+        let depLast = null;
+        function renderReviews(raw) {
+            if (raw === depLast) return;
+            depLast = raw;
+            let list;
+            try { list = JSON.parse(raw); } catch { list = null; }
+            if (!Array.isArray(list)) { try { list = JSON.parse(defaults.get(depEl)); } catch { list = []; } }
+            list = list.filter(r => r && String(r.t || '').trim());
+            const sec = document.getElementById('depoimentos');
+            if (sec) sec.style.display = list.length ? '' : 'none';
+            const track = document.getElementById('dep-track');
+            track.innerHTML = '';
+            if (!list.length) return;
+            const reps = Math.max(1, Math.ceil(8 / list.length));       // garante que o grupo preencha a tela
+            const group = mk('div', 'dep-group');
+            for (let r = 0; r < reps; r++) list.forEach((it, i) => group.appendChild(depCard(it, i)));
+            const clone = group.cloneNode(true); clone.setAttribute('aria-hidden', 'true');
+            track.append(group, clone);
+            requestAnimationFrame(() => track.style.setProperty('--dep-dur', Math.max(25, group.offsetWidth / 50) + 's')); // ~50px/s
+        }
+        const depEl = document.querySelector('[data-key="dep_lista"]');
+
         function render() {
             els.forEach(el => {
                 const key = el.dataset.key;
                 const type = el.dataset.type || 'text';
                 let v = pv.reset.includes(key) ? undefined : (pv.img[key] ?? pv.text[key] ?? imgs[key] ?? texts[key]);
                 if (v === undefined || v === null) v = defaults.get(el);
+                if (type === 'reviews') { renderReviews(v); return; }
                 if (type === 'img') {
                     if (v) {
                         el.style.display = '';

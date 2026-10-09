@@ -87,6 +87,18 @@
   .card { background:#fff; border:1px solid var(--line); border-radius:20px; padding:22px; margin-bottom:18px; box-shadow:0 1px 2px rgba(15,23,42,.04); }
   .card > h4 { margin:0 0 16px; font:800 14px Montserrat,sans-serif; letter-spacing:.04em; text-transform:uppercase; color:var(--blue); display:flex; align-items:center; gap:8px; }
   .card > h4::before { content:''; width:6px; height:18px; border-radius:3px; background:var(--cyan); }
+
+  /* editor de avaliações */
+  .rv { border:1.5px solid var(--line); border-radius:16px; padding:14px; margin-bottom:12px; background:#fff; }
+  .rv-h { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px; font:800 12.5px Montserrat,sans-serif; color:var(--blue); text-transform:uppercase; letter-spacing:.04em; }
+  .rv-h .b { display:flex; gap:6px; }
+  .rv-g { display:grid; grid-template-columns:1fr 1fr 110px; gap:10px; margin-bottom:10px; }
+  .rv-g label, .rv > label { display:block; font-size:12px; font-weight:700; color:#475569; margin-bottom:5px; }
+  .rv select { width:100%; padding:12px 10px; border:1.5px solid #dbe3ee; border-radius:12px; font:500 14px Inter,sans-serif; background:#f8fafc; }
+  .rv textarea { min-height:78px; }
+  .rv .btn:disabled { opacity:.4; cursor:default; }
+  .rv-acts { display:flex; gap:10px; flex-wrap:wrap; margin-top:4px; }
+  @media (max-width:700px) { .rv-g { grid-template-columns:1fr; } }
   .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px 18px; }
   .grid .full { grid-column:1/-1; }
   .field label { display:flex; align-items:center; justify-content:space-between; font-size:12.5px; font-weight:700; color:#475569; margin-bottom:7px; }
@@ -266,7 +278,7 @@ async function loadSchema() {
     if (seen.has(key) || !el.dataset.label) return;
     seen.add(key);
     const type = el.dataset.type || 'text';
-    const def = type === 'img' ? (el.getAttribute('src') || '') : type === 'social' ? '' : el.textContent.replace(/\s+/g, ' ').trim();
+    const def = type === 'img' ? (el.getAttribute('src') || '') : type === 'social' ? '' : type === 'reviews' ? el.textContent.trim() : el.textContent.replace(/\s+/g, ' ').trim();
     fields.push({ key, type, label: el.dataset.label, group: el.dataset.group || 'Outros', def });
   });
 }
@@ -395,7 +407,47 @@ function go(id) {
   if (id !== 'home') { const f0 = fields.find(f => secId(f.group) === id); if (f0) focusKey(f0.key); }
 }
 
+function buildReviews(f) {
+  const div = document.createElement('div'); div.dataset.key = f.key; div.className = 'field full';
+  const parse = s => { try { const x = JSON.parse(s); return Array.isArray(x) ? x : []; } catch { return []; } };
+  let list = parse(currentValue(f));
+  const commit = () => { pendingText[f.key] = JSON.stringify(list); pendingReset.delete(f.key); refresh(); };
+  const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  const draw = () => {
+    div.innerHTML = `<label><span>Cards que passam no carrossel (${list.length})</span><span class="dot"></span></label><div class="rvs"></div>
+      <div class="rv-acts"><button type="button" class="btn btn-save btn-sm add"><i class="fa-solid fa-plus"></i> Adicionar avaliação</button><button type="button" class="btn btn-ghost btn-sm rs"><i class="fa-solid fa-rotate-left"></i> Restaurar originais</button></div>
+      <div class="hint">Cada avaliação vira um card que corre para a esquerda sem parar. As iniciais e a cor do círculo são geradas pelo nome. Avaliação sem texto não aparece no site.</div>`;
+    const box = div.querySelector('.rvs');
+    list.forEach((r, i) => {
+      const it = document.createElement('div'); it.className = 'rv';
+      it.innerHTML = `<div class="rv-h"><span>Avaliação ${i + 1}</span><span class="b">
+          <button type="button" class="btn btn-ghost btn-sm up" title="Mover para cima" ${i === 0 ? 'disabled' : ''}><i class="fa-solid fa-arrow-up"></i></button>
+          <button type="button" class="btn btn-ghost btn-sm dn" title="Mover para baixo" ${i === list.length - 1 ? 'disabled' : ''}><i class="fa-solid fa-arrow-down"></i></button>
+          <button type="button" class="btn btn-ghost btn-sm del" title="Remover"><i class="fa-solid fa-trash"></i></button></span></div>
+        <div class="rv-g">
+          <div><label>Nome</label><input type="text" data-f="n" value="${esc(r.n)}"></div>
+          <div><label>Complemento</label><input type="text" data-f="c" value="${esc(r.c)}" placeholder="Ex: Cliente Residencial"></div>
+          <div><label>Estrelas</label><select data-f="s">${[5,4,3,2,1].map(n => `<option value="${n}" ${(+r.s || 5) === n ? 'selected' : ''}>${n}</option>`).join('')}</select></div>
+        </div>
+        <label>Texto da avaliação (sem aspas, elas são colocadas automaticamente)</label><textarea data-f="t">${esc(r.t)}</textarea>`;
+      it.querySelectorAll('[data-f]').forEach(inp => {
+        inp.addEventListener('focus', () => focusKey(f.key));
+        inp.addEventListener('input', () => { list[i][inp.dataset.f] = inp.dataset.f === 's' ? +inp.value : inp.value; commit(); });
+      });
+      it.querySelector('.up').onclick = () => { [list[i-1], list[i]] = [list[i], list[i-1]]; commit(); draw(); };
+      it.querySelector('.dn').onclick = () => { [list[i+1], list[i]] = [list[i], list[i+1]]; commit(); draw(); };
+      it.querySelector('.del').onclick = () => { if (confirm('Remover esta avaliação?')) { list.splice(i, 1); commit(); draw(); } };
+      box.appendChild(it);
+    });
+    div.querySelector('.add').onclick = () => { list.push({ n: '', c: 'Cliente', s: 5, t: '' }); commit(); draw(); box.lastElementChild?.querySelector('input')?.focus(); };
+    div.querySelector('.rs').onclick = () => { if (!confirm('Voltar para as avaliações originais do site?')) return; delete pendingText[f.key]; pendingReset.add(f.key); list = parse(f.def); draw(); refresh(); };
+  };
+  draw();
+  return div;
+}
+
 function buildField(f, name) {
+  if (f.type === 'reviews') return buildReviews(f);
   const div = document.createElement('div'); div.dataset.key = f.key;
   const val = currentValue(f);
 
