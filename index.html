@@ -53,10 +53,10 @@
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-slate-200/80 transition-all duration-300" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-20 sm:h-24">
 
                 <a href="#inicio" class="flex items-center gap-3 group">
-                    <img id="logo-img" data-key="logo" data-type="img" data-group="1. Cabeçalho" data-label="Logo da empresa" src="logo.png" alt="DK Service" class="h-12 w-auto object-contain" onerror="this.style.display='none'; document.getElementById('svg-logo-fallback').classList.remove('hidden');">
+                    <img id="logo-img" data-key="logo" data-type="img" data-group="1. Cabeçalho" data-label="Logo da empresa" src="logo.png" alt="DK Service" class="h-14 sm:h-[76px] w-auto object-contain" onerror="this.style.display='none'; document.getElementById('svg-logo-fallback').classList.remove('hidden');">
 
                     <div id="svg-logo-fallback" class="hidden flex items-center gap-2">
                         <div class="w-10 h-10 bg-dk-navy rounded-xl flex items-center justify-center text-white font-extrabold text-xl shadow-md border border-dk-cyan/40">
@@ -105,7 +105,7 @@
     </header>
 
     <!-- Hero -->
-    <section id="inicio" class="hero-gradient pt-28 pb-16 lg:pt-36 lg:pb-24 relative overflow-hidden text-white">
+    <section id="inicio" class="hero-gradient pt-28 sm:pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden text-white">
         <div class="absolute top-0 left-1/4 w-96 h-96 bg-dk-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute bottom-0 right-10 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -459,9 +459,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
 
                 <div>
-                    <h3 class="font-heading font-extrabold text-white text-xl mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-snowflake text-dk-cyan"></i> <span data-key="rod_nome" data-group="8. Rodapé" data-label="Nome da empresa">DK Service</span>
-                    </h3>
+                    <div class="inline-block bg-white rounded-2xl px-4 py-2 mb-4 shadow-lg">
+                        <img data-key="logo" data-type="img" src="logo.png" alt="DK Service" class="h-14 w-auto object-contain block" onerror="this.parentElement.style.display='none'">
+                    </div>
                     <p data-key="rod_sobre" data-group="8. Rodapé" data-label="Descrição" class="text-xs sm:text-sm leading-relaxed text-slate-400">Climatização & Serviços. Conforto e soluções em geral para residências, comércios e indústrias.</p>
 
                     <!-- Redes sociais -->
