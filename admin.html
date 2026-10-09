@@ -127,7 +127,7 @@
   .hero .hi { width:58px; height:58px; border-radius:18px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:24px; flex:none; position:relative; z-index:1; }
   .hero .ht { position:relative; z-index:1; }
   .hero h3 { font-size:22px; }
-  .live { background:#fff; border:1px solid var(--line); border-radius:22px; overflow:hidden; margin-bottom:26px; box-shadow:0 18px 50px rgba(15,23,42,.1); }
+  .live { background:#fff; border:1px solid var(--line); border-radius:22px; overflow:hidden; margin-bottom:0; box-shadow:0 18px 50px rgba(15,23,42,.1); }
   .live .bar { display:flex; align-items:center; gap:14px; padding:12px 16px; background:#f1f5f9; border-bottom:1px solid var(--line); flex-wrap:wrap; }
   .live .dots { display:flex; gap:6px; } .live .dots i { width:11px; height:11px; border-radius:50%; display:block; }
   .live .dots i:nth-child(1){background:#f87171;} .live .dots i:nth-child(2){background:#fbbf24;} .live .dots i:nth-child(3){background:#34d399;}
@@ -138,7 +138,7 @@
   .seg button.on { background:#fff; color:var(--navy); box-shadow:0 1px 4px rgba(0,0,0,.12); }
   .live .rl { border:0; background:#fff; border:1px solid var(--line); width:34px; height:34px; border-radius:10px; cursor:pointer; color:#475569; }
   .live .rl:hover { color:var(--cyan); }
-  .stage { position:relative; height:640px; overflow:hidden; background:#cbd5e1; }
+  .stage { position:relative; height:calc(100vh - 230px); min-height:460px; overflow:hidden; background:#cbd5e1; }
   .stage iframe { position:absolute; top:0; left:0; border:0; background:#fff; transform-origin:top left; }
   .stage.mobile iframe { left:50%; border-radius:18px; box-shadow:0 0 0 8px #0f172a, 0 20px 50px rgba(0,0,0,.35); margin-top:12px; }
   .live .tag { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#15803d; }
@@ -313,6 +313,15 @@ function fitHome() {
 }
 window.addEventListener('resize', fitHome);
 
+// Faz o site (pré-visualização) rolar até o item que está sendo editado
+let lastKey = null;
+function focusKey(key) {
+  lastKey = key;
+  document.querySelectorAll('iframe').forEach(fr => {
+    try { fr.contentWindow.postMessage({ dkScrollTo: key }, location.origin); } catch {}
+  });
+}
+
 // ---------- Construção da interface ----------
 function build() {
   const groups = {};
@@ -332,8 +341,7 @@ function build() {
   // conteúdo
   const main = $('main'); main.innerHTML = '';
   const home = document.createElement('section'); home.className = 'section'; home.id = 'sec-home';
-  home.innerHTML = `<div class="hero"><div class="hi"><i class="fa-solid fa-sliders"></i></div><div class="ht"><h3>Bem-vindo ao seu painel</h3><p>Controle tudo no site: textos, fotos, WhatsApp e redes sociais. Veja abaixo o site ao vivo: ao editar, ele muda na hora, mesmo antes de salvar.</p></div></div>
-    <div class="live">
+  home.innerHTML = `<div class="live">
       <div class="bar">
         <div class="dots"><i></i><i></i><i></i></div>
         <div class="url"><i class="fa-solid fa-lock"></i><span>${location.host}</span></div>
@@ -342,21 +350,13 @@ function build() {
         <button class="rl" title="Recarregar"><i class="fa-solid fa-rotate"></i></button>
       </div>
       <div class="stage" id="stage"><iframe id="homeFrame" src="index.html" title="Site ao vivo"></iframe></div>
-    </div>
-    <div class="sec-t">Editar por seção</div>
-    <div class="tiles"></div>`;
+    </div>`;
   home.querySelectorAll('.seg button').forEach(b => b.onclick = () => {
     homeMode = b.dataset.m;
     home.querySelectorAll('.seg button').forEach(x => x.classList.toggle('on', x === b));
     fitHome();
   });
   home.querySelector('.rl').onclick = () => { $('homeFrame').contentWindow.location.reload(); };
-  const tiles = home.querySelector('.tiles');
-  names.forEach(g => {
-    const t = document.createElement('button'); t.className = 'tile';
-    t.innerHTML = `<div class="ti"><i class="fa-solid ${ICONS[secNum(g)] || 'fa-pen'}"></i></div><b>${secName(g)}</b><span>${SUBS[secNum(g)] || ''}</span>`;
-    t.onclick = () => go(secId(g)); tiles.appendChild(t);
-  });
   main.appendChild(home);
 
   names.forEach(g => {
@@ -386,12 +386,13 @@ function go(id) {
   currentSec = id;
   document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'sec-' + id));
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('active', b.dataset.sec === id));
-  if (id === 'home') { $('secTitle').textContent = 'Visão geral'; $('secSub').textContent = 'Seu site ao vivo e atalhos para editar'; fitHome(); }
+  if (id === 'home') { $('secTitle').textContent = 'Visão geral'; $('secSub').textContent = 'Seu site ao vivo, atualizado enquanto você edita'; fitHome(); }
   else {
     const g = fields.find(f => secId(f.group) === id).group;
     $('secTitle').textContent = secName(g); $('secSub').textContent = SUBS[secNum(g)] || '';
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id !== 'home') { const f0 = fields.find(f => secId(f.group) === id); if (f0) focusKey(f0.key); }
 }
 
 function buildField(f, name) {
@@ -411,11 +412,11 @@ function buildField(f, name) {
       if (!fl) return;
       try {
         const data = await compress(fl, f.key.startsWith('logo') ? 700 : 1200);
-        pendingImg[f.key] = data; pendingReset.delete(f.key); img.src = data; img.style.opacity = 1; refresh();
+        pendingImg[f.key] = data; pendingReset.delete(f.key); img.src = data; img.style.opacity = 1; refresh(); focusKey(f.key);
       } catch { toast('Não consegui ler essa imagem.', 'fa-triangle-exclamation'); }
     };
-    drop.onclick = () => file.click();
-    div.querySelector('.up').onclick = () => file.click();
+    drop.onclick = () => { focusKey(f.key); file.click(); };
+    div.querySelector('.up').onclick = () => { focusKey(f.key); file.click(); };
     file.onchange = () => pick(file.files[0]);
     ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
     ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
@@ -431,6 +432,7 @@ function buildField(f, name) {
   if (!long) input.type = f.type === 'social' ? 'url' : 'text';
   if (f.type === 'social') input.placeholder = 'https://...';
   input.value = val;
+  input.addEventListener('focus', () => focusKey(f.key));
   input.addEventListener('input', () => { pendingText[f.key] = input.value; pendingReset.delete(f.key); refresh(); });
   const rst = document.createElement('button'); rst.type = 'button'; rst.className = 'rst'; rst.title = 'Restaurar original'; rst.innerHTML = '<i class="fa-solid fa-rotate-left"></i>';
   rst.onclick = () => { delete pendingText[f.key]; pendingReset.add(f.key); input.value = f.def; refresh(); };
@@ -503,6 +505,10 @@ $('prevBtn').addEventListener('click', () => {
   const p = $('preview'); const f = $('prevFrame');
   if (!f.src) f.src = 'index.html';
   p.classList.toggle('open');
+  if (p.classList.contains('open')) setTimeout(() => {
+    const k = lastKey || (fields.find(x => secId(x.group) === currentSec) || {}).key;
+    if (k) focusKey(k);
+  }, 600);
 });
 $('prevClose').addEventListener('click', () => $('preview').classList.remove('open'));
 
