@@ -51,14 +51,8 @@
 <div id="login" class="login">
   <form id="loginForm">
     <h1>Painel DK Service</h1>
-    <p>Entre para editar o site.</p>
-    <label for="email">E-mail</label>
-    <input type="email" id="email" required autocomplete="username">
-    <div style="height:12px"></div>
-    <label for="senha">Senha</label>
-    <input type="password" id="senha" required autocomplete="current-password">
-    <div style="height:18px"></div>
-    <button class="btn btn-primary" style="width:100%">Entrar</button>
+    <p>Entre com a conta Google autorizada para editar o site.</p>
+    <button type="submit" class="btn btn-primary" style="width:100%">Entrar com Google</button>
     <div class="err" id="loginErr"></div>
   </form>
 </div>
@@ -85,16 +79,10 @@
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, collection, onSnapshot, setDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { firebaseConfig, ADMIN_EMAILS } from "./firebase-config.js";
 
-const app = initializeApp({
-  apiKey: "AIzaSyAY9T1msHMAtAAdRiPBNhch9IRUmnahjuk",
-  authDomain: "dkservice-d5b03.firebaseapp.com",
-  projectId: "dkservice-d5b03",
-  storageBucket: "dkservice-d5b03.firebasestorage.app",
-  messagingSenderId: "121430782968",
-  appId: "1:121430782968:web:c6daedf81add1e7d4f1c0d"
-});
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
@@ -104,13 +92,18 @@ const toast = (msg) => { const t=$('toast'); t.textContent=msg; t.classList.remo
 // ---------- Login ----------
 $('loginForm').addEventListener('submit', async e => {
   e.preventDefault(); $('loginErr').textContent = '';
-  try { await signInWithEmailAndPassword(auth, $('email').value.trim(), $('senha').value); }
-  catch { $('loginErr').textContent = 'E-mail ou senha incorretos.'; }
+  try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+  catch { $('loginErr').textContent = 'Não foi possível entrar com o Google.'; }
 });
 $('logoutBtn').addEventListener('click', () => signOut(auth));
 
 let started = false;
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, async user => {
+  if (user && !ADMIN_EMAILS.includes((user.email || '').toLowerCase())) {
+    await signOut(auth);
+    $('loginErr').textContent = 'Esta conta Google não tem permissão para acessar o painel.';
+    return;
+  }
   $('login').classList.toggle('hidden', !!user);
   $('panel').classList.toggle('hidden', !user);
   if (user && !started) { started = true; init(); }

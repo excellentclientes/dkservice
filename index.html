@@ -478,6 +478,10 @@
                            class="hidden w-10 h-10 rounded-full bg-slate-800 hover:bg-pink-600 text-white flex items-center justify-center transition-colors">
                             <i class="fa-brands fa-instagram text-lg"></i>
                         </a>
+                        <a href="" data-key="tiktok_url" data-type="social" data-group="0. Contatos e Redes Sociais" data-label="Link do TikTok (deixe vazio para esconder o ícone)" target="_blank" rel="noopener" title="TikTok"
+                           class="hidden w-10 h-10 rounded-full bg-slate-800 hover:bg-black text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-tiktok text-lg"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -547,14 +551,8 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, doc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        const app = initializeApp({
-            apiKey: "AIzaSyAY9T1msHMAtAAdRiPBNhch9IRUmnahjuk",
-            authDomain: "dkservice-d5b03.firebaseapp.com",
-            projectId: "dkservice-d5b03",
-            storageBucket: "dkservice-d5b03.firebasestorage.app",
-            messagingSenderId: "121430782968",
-            appId: "1:121430782968:web:c6daedf81add1e7d4f1c0d"
-        });
+        import { firebaseConfig } from "./firebase-config.js";
+        const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
         const els = [...document.querySelectorAll('[data-key]')];
