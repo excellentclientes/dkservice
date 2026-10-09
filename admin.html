@@ -122,7 +122,32 @@
 
   .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#0f172a; color:#fff; padding:13px 22px; border-radius:14px; font-size:14px; font-weight:600; z-index:90; box-shadow:0 14px 40px rgba(0,0,0,.35); display:flex; gap:10px; align-items:center; }
 
+  /* ---------- VISÃO GERAL: site ao vivo ---------- */
+  .hero { display:flex; align-items:center; gap:18px; }
+  .hero .hi { width:58px; height:58px; border-radius:18px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:24px; flex:none; position:relative; z-index:1; }
+  .hero .ht { position:relative; z-index:1; }
+  .hero h3 { font-size:22px; }
+  .live { background:#fff; border:1px solid var(--line); border-radius:22px; overflow:hidden; margin-bottom:26px; box-shadow:0 18px 50px rgba(15,23,42,.1); }
+  .live .bar { display:flex; align-items:center; gap:14px; padding:12px 16px; background:#f1f5f9; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .live .dots { display:flex; gap:6px; } .live .dots i { width:11px; height:11px; border-radius:50%; display:block; }
+  .live .dots i:nth-child(1){background:#f87171;} .live .dots i:nth-child(2){background:#fbbf24;} .live .dots i:nth-child(3){background:#34d399;}
+  .live .url { flex:1; min-width:140px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:7px 12px; font-size:12.5px; color:var(--mut); display:flex; align-items:center; gap:8px; }
+  .live .url i { color:#16a34a; }
+  .seg { display:flex; background:#e2e8f0; border-radius:10px; padding:3px; }
+  .seg button { border:0; background:transparent; padding:6px 12px; border-radius:8px; font:700 12px Inter,sans-serif; color:#475569; cursor:pointer; display:flex; align-items:center; gap:6px; }
+  .seg button.on { background:#fff; color:var(--navy); box-shadow:0 1px 4px rgba(0,0,0,.12); }
+  .live .rl { border:0; background:#fff; border:1px solid var(--line); width:34px; height:34px; border-radius:10px; cursor:pointer; color:#475569; }
+  .live .rl:hover { color:var(--cyan); }
+  .stage { position:relative; height:640px; overflow:hidden; background:#cbd5e1; }
+  .stage iframe { position:absolute; top:0; left:0; border:0; background:#fff; transform-origin:top left; }
+  .stage.mobile iframe { left:50%; border-radius:18px; box-shadow:0 0 0 8px #0f172a, 0 20px 50px rgba(0,0,0,.35); margin-top:12px; }
+  .live .tag { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#15803d; }
+  .live .tag::before { content:''; width:8px; height:8px; border-radius:50%; background:#22c55e; animation:blink 1.6s infinite; }
+  @keyframes blink { 50% { opacity:.25; } }
+  .sec-t { font:800 13px Montserrat,sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); margin:0 0 14px; }
+
   @media (max-width: 900px) {
+    .stage { height:520px; }
     .app { grid-template-columns:1fr; }
     aside.side { position:relative; height:auto; flex-direction:column; padding:12px; }
     .side .logo { padding-bottom:10px; margin-bottom:8px; } .side .logo img { height:48px; }
@@ -150,7 +175,7 @@
       Entrar com Google
     </button>
     <div class="err" id="loginErr"></div>
-    <div class="foot">🔒 Conexão protegida</div>
+    <div class="foot"><i class="fa-solid fa-lock"></i>&nbsp; Conexão protegida</div>
   </form>
 </div>
 
@@ -265,6 +290,29 @@ function currentValue(f) {
 }
 const isPending = k => k in pendingText || k in pendingImg || pendingReset.has(k);
 
+// Envia as alterações (mesmo não salvas) para os sites de pré-visualização
+function pushPreview() {
+  document.querySelectorAll('iframe').forEach(fr => {
+    try { fr.contentWindow.postMessage({ dkPreview: { text: pendingText, img: pendingImg, reset: [...pendingReset] } }, location.origin); } catch {}
+  });
+}
+document.addEventListener('load', e => { if (e.target.tagName === 'IFRAME') pushPreview(); }, true);
+
+// Ajusta o site dentro da moldura (computador = escala 1280px; celular = 390px)
+let homeMode = 'desktop';
+function fitHome() {
+  const stage = $('stage'), fr = $('homeFrame'); if (!stage || !fr) return;
+  const H = stage.clientHeight || 640;
+  stage.classList.toggle('mobile', homeMode === 'mobile');
+  if (homeMode === 'mobile') {
+    fr.style.width = '390px'; fr.style.height = (H - 24) + 'px'; fr.style.transform = 'translateX(-50%)';
+  } else {
+    const s = (stage.clientWidth || 1280) / 1280;
+    fr.style.width = '1280px'; fr.style.height = (H / s) + 'px'; fr.style.transform = `scale(${s})`;
+  }
+}
+window.addEventListener('resize', fitHome);
+
 // ---------- Construção da interface ----------
 function build() {
   const groups = {};
@@ -284,7 +332,25 @@ function build() {
   // conteúdo
   const main = $('main'); main.innerHTML = '';
   const home = document.createElement('section'); home.className = 'section'; home.id = 'sec-home';
-  home.innerHTML = `<div class="hero"><h3>Bem-vindo ao seu painel 👋</h3><p>Aqui você controla tudo no site: textos, fotos, WhatsApp e redes sociais. Escolha uma seção abaixo, faça as mudanças e clique em <b>Salvar alterações</b>. O site se atualiza na hora.</p></div><div class="tiles"></div>`;
+  home.innerHTML = `<div class="hero"><div class="hi"><i class="fa-solid fa-sliders"></i></div><div class="ht"><h3>Bem-vindo ao seu painel</h3><p>Controle tudo no site: textos, fotos, WhatsApp e redes sociais. Veja abaixo o site ao vivo: ao editar, ele muda na hora, mesmo antes de salvar.</p></div></div>
+    <div class="live">
+      <div class="bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="url"><i class="fa-solid fa-lock"></i><span>${location.host}</span></div>
+        <span class="tag">Ao vivo</span>
+        <div class="seg"><button class="on" data-m="desktop"><i class="fa-solid fa-desktop"></i> Computador</button><button data-m="mobile"><i class="fa-solid fa-mobile-screen"></i> Celular</button></div>
+        <button class="rl" title="Recarregar"><i class="fa-solid fa-rotate"></i></button>
+      </div>
+      <div class="stage" id="stage"><iframe id="homeFrame" src="index.html" title="Site ao vivo"></iframe></div>
+    </div>
+    <div class="sec-t">Editar por seção</div>
+    <div class="tiles"></div>`;
+  home.querySelectorAll('.seg button').forEach(b => b.onclick = () => {
+    homeMode = b.dataset.m;
+    home.querySelectorAll('.seg button').forEach(x => x.classList.toggle('on', x === b));
+    fitHome();
+  });
+  home.querySelector('.rl').onclick = () => { $('homeFrame').contentWindow.location.reload(); };
   const tiles = home.querySelector('.tiles');
   names.forEach(g => {
     const t = document.createElement('button'); t.className = 'tile';
@@ -320,7 +386,7 @@ function go(id) {
   currentSec = id;
   document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'sec-' + id));
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('active', b.dataset.sec === id));
-  if (id === 'home') { $('secTitle').textContent = 'Visão geral'; $('secSub').textContent = 'Escolha uma seção para editar'; }
+  if (id === 'home') { $('secTitle').textContent = 'Visão geral'; $('secSub').textContent = 'Seu site ao vivo e atalhos para editar'; fitHome(); }
   else {
     const g = fields.find(f => secId(f.group) === id).group;
     $('secTitle').textContent = secName(g); $('secSub').textContent = SUBS[secNum(g)] || '';
@@ -387,6 +453,7 @@ function refresh() {
   const st = $('status');
   st.className = 'status' + (total ? ' dirty' : ' ok');
   st.innerHTML = total ? '<i class="fa-solid fa-circle-exclamation"></i> Alterações não salvas' : '<i class="fa-solid fa-circle-check"></i> Tudo salvo';
+  pushPreview();
 }
 
 // ---------- Compressão de imagem (base64) ----------

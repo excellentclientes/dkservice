@@ -563,12 +563,20 @@
         });
 
         let texts = {}, imgs = {};
+        // Pré-visualização em tempo real vindas do painel (alterações ainda não salvas)
+        let pv = { text: {}, img: {}, reset: [] };
+        window.addEventListener('message', e => {
+            if (e.origin !== location.origin || !e.data || !e.data.dkPreview) return;
+            const p = e.data.dkPreview;
+            pv = { text: p.text || {}, img: p.img || {}, reset: p.reset || [] };
+            render();
+        });
 
         function render() {
             els.forEach(el => {
                 const key = el.dataset.key;
                 const type = el.dataset.type || 'text';
-                let v = imgs[key] !== undefined ? imgs[key] : texts[key];
+                let v = pv.reset.includes(key) ? undefined : (pv.img[key] ?? pv.text[key] ?? imgs[key] ?? texts[key]);
                 if (v === undefined || v === null) v = defaults.get(el);
                 if (type === 'img') {
                     if (v) {
