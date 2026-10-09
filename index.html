@@ -43,6 +43,48 @@
         @keyframes float-slow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         .animate-float { animation: float-slow 4s ease-in-out infinite; }
         summary::-webkit-details-marker { display: none; }
+
+        /* ---------- Animações ao passar o mouse nos cards ---------- */
+        @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+            .dk-card { transition: opacity .7s ease-out, transform .7s ease-out, translate .35s cubic-bezier(.2,.8,.2,1), scale .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease !important; }
+            .dk-card:hover { translate: 0 -10px; box-shadow: 0 24px 48px -14px rgba(0,180,216,.40), 0 0 0 1.5px rgba(0,180,216,.55) !important; }
+
+            /* barra de destaque que corre no topo */
+            .dk-line { position: relative; overflow: hidden; }
+            .dk-line::before { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #00B4D8, #1E3A8A); transform: scaleX(0); transform-origin: left; transition: transform .5s ease; z-index: 2; }
+            .dk-line:hover::before { transform: scaleX(1); }
+
+            /* ícones dos diferenciais */
+            .dk-icon { transition: transform .4s cubic-bezier(.3,1.6,.5,1); }
+            .dk-card:hover .dk-icon { transform: rotate(-10deg) scale(1.18); }
+
+            /* portfólio: legenda sobe, foto dá zoom (já existe) */
+            .dk-cap { transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+            .dk-card:hover .dk-cap { transform: translateY(-8px); }
+
+            /* avaliações */
+            .dk-stars i { display: inline-block; }
+            .dk-card:hover .dk-stars i { animation: dk-starpop .6s ease both; }
+            .dk-card:hover .dk-stars i:nth-child(2) { animation-delay: .08s; }
+            .dk-card:hover .dk-stars i:nth-child(3) { animation-delay: .16s; }
+            .dk-card:hover .dk-stars i:nth-child(4) { animation-delay: .24s; }
+            .dk-card:hover .dk-stars i:nth-child(5) { animation-delay: .32s; }
+            @keyframes dk-starpop { 0% { transform: scale(1); } 45% { transform: scale(1.6) rotate(18deg); color: #fde047; } 100% { transform: scale(1); } }
+            .dk-avatar { transition: transform .4s cubic-bezier(.3,1.6,.5,1), box-shadow .3s; }
+            .dk-card:hover .dk-avatar { transform: scale(1.18); box-shadow: 0 0 0 4px rgba(0,180,216,.35); }
+
+            /* perguntas frequentes */
+            .dk-faq:hover { translate: 0 -4px; }
+            .dk-faq i.fa-circle-question { display: inline-block; transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+            .dk-faq:hover i.fa-circle-question { transform: scale(1.25) rotate(-12deg); }
+
+            /* foto principal do topo */
+            .dk-hero:hover { translate: 0 -6px; }
+            .dk-hero img { transition: transform .7s ease; }
+            .dk-hero:hover img { transform: scale(1.07); }
+            .dk-pop { transition: scale .35s cubic-bezier(.3,1.6,.5,1); }
+            .dk-pop:hover { scale: 1.08; }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -157,7 +199,7 @@
 
                 <div class="lg:col-span-5 relative reveal">
                     <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 bg-dk-navy">
+                        <div class="dk-card dk-hero relative z-10 rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 bg-dk-navy">
                             <img id="hero-img"
                                  data-key="hero_img" data-type="img" data-group="2. Topo da página (Hero)" data-label="Foto principal"
                                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
@@ -173,7 +215,7 @@
                             </div>
                         </div>
 
-                        <div class="absolute -bottom-5 -left-5 z-20 bg-white text-slate-900 rounded-2xl p-4 shadow-2xl border border-slate-100 flex items-center gap-3 animate-float hidden sm:flex">
+                        <div class="dk-pop absolute -bottom-5 -left-5 z-20 bg-white text-slate-900 rounded-2xl p-4 shadow-2xl border border-slate-100 flex items-center gap-3 animate-float hidden sm:flex">
                             <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center text-sky-600 text-xl font-bold">
                                 <i class="fa-solid fa-shield-halved"></i>
                             </div>
@@ -201,9 +243,9 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-                <div class="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
+                <div class="dk-card dk-line bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
                     <div>
-                        <div class="w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600 text-2xl font-bold mb-6"><i class="fa-solid fa-microscope"></i></div>
+                        <div class="dk-icon w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600 text-2xl font-bold mb-6"><i class="fa-solid fa-microscope"></i></div>
                         <h3 data-key="dif1_t" data-group="3. Diferenciais" data-label="Card 1 - título" class="text-xl font-bold text-slate-900 mb-3">Diagnóstico Preciso</h3>
                         <p data-key="dif1_d" data-group="3. Diferenciais" data-label="Card 1 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Avaliamos a pressão, fluído refrigerante e componente elétrico antes de qualquer ação. Você paga apenas pelo que realmente precisa arrumar.</p>
                     </div>
@@ -212,9 +254,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
+                <div class="dk-card dk-line bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
                     <div>
-                        <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl font-bold mb-6"><i class="fa-solid fa-sparkles"></i></div>
+                        <div class="dk-icon w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl font-bold mb-6"><i class="fa-solid fa-sparkles"></i></div>
                         <h3 data-key="dif2_t" data-group="3. Diferenciais" data-label="Card 2 - título" class="text-xl font-bold text-slate-900 mb-3">Instalação & Higienização Limpa</h3>
                         <p data-key="dif2_d" data-group="3. Diferenciais" data-label="Card 2 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Protegemos seus móveis e parede. Utilizamos bolsa colecionadora de resíduos e ferramentas com aspiração para entregar o ambiente brilhando.</p>
                     </div>
@@ -223,9 +265,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
+                <div class="dk-card dk-line bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
                     <div>
-                        <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 text-2xl font-bold mb-6"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="dk-icon w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 text-2xl font-bold mb-6"><i class="fa-solid fa-bolt"></i></div>
                         <h3 data-key="dif3_t" data-group="3. Diferenciais" data-label="Card 3 - título" class="text-xl font-bold text-slate-900 mb-3">Economia de Energia</h3>
                         <p data-key="dif3_d" data-group="3. Diferenciais" data-label="Card 3 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Um ar-condicionado bem limpo e instalado no nível correto consome até 30% menos energia elétrica ao atingir a temperatura rapidamente.</p>
                     </div>
@@ -259,52 +301,52 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                <div class="group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
+                <div class="dk-card group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
                     <img data-key="p1_img" data-type="img" data-group="4. Portfólio" data-label="Foto 1"
                          src="https://images.unsplash.com/photo-1631545806603-63b71db414eb?auto=format&fit=crop&w=600&q=80"
                          alt="Instalação de Split Residencial"
                          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80';">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
+                    <div class="dk-cap absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
                         <span data-key="p1_tag" data-group="4. Portfólio" data-label="Foto 1 - etiqueta" class="text-dk-cyan font-bold text-xs uppercase tracking-wider mb-1">Residencial</span>
                         <h3 data-key="p1_t" data-group="4. Portfólio" data-label="Foto 1 - título" class="text-white font-bold text-lg">Instalação de Split Hi-Wall</h3>
                         <p data-key="p1_s" data-group="4. Portfólio" data-label="Foto 1 - descrição" class="text-slate-300 text-xs mt-1">Acabamento com tubulação embutida</p>
                     </div>
                 </div>
 
-                <div class="group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
+                <div class="dk-card group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
                     <img data-key="p2_img" data-type="img" data-group="4. Portfólio" data-label="Foto 2"
                          src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
                          alt="Higienização de Ar Condicionado"
                          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80';">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
+                    <div class="dk-cap absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
                         <span data-key="p2_tag" data-group="4. Portfólio" data-label="Foto 2 - etiqueta" class="text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">Manutenção</span>
                         <h3 data-key="p2_t" data-group="4. Portfólio" data-label="Foto 2 - título" class="text-white font-bold text-lg">Higienização Química</h3>
                         <p data-key="p2_s" data-group="4. Portfólio" data-label="Foto 2 - descrição" class="text-slate-300 text-xs mt-1">Eliminação de bactérias e fungos</p>
                     </div>
                 </div>
 
-                <div class="group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
+                <div class="dk-card group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
                     <img data-key="p3_img" data-type="img" data-group="4. Portfólio" data-label="Foto 3"
                          src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80"
                          alt="Infraestrutura Comercial"
                          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1631545806603-63b71db414eb?auto=format&fit=crop&w=600&q=80';">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
+                    <div class="dk-cap absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
                         <span data-key="p3_tag" data-group="4. Portfólio" data-label="Foto 3 - etiqueta" class="text-sky-400 font-bold text-xs uppercase tracking-wider mb-1">Comercial</span>
                         <h3 data-key="p3_t" data-group="4. Portfólio" data-label="Foto 3 - título" class="text-white font-bold text-lg">Projeto de Climatização</h3>
                         <p data-key="p3_s" data-group="4. Portfólio" data-label="Foto 3 - descrição" class="text-slate-300 text-xs mt-1">Sistemas centrais para empresas</p>
                     </div>
                 </div>
 
-                <div class="group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
+                <div class="dk-card group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
                     <img data-key="p4_img" data-type="img" data-group="4. Portfólio" data-label="Foto 4"
                          src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80"
                          alt="Assistência Técnica e Diagnóstico"
                          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80';">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
+                    <div class="dk-cap absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
                         <span data-key="p4_tag" data-group="4. Portfólio" data-label="Foto 4 - etiqueta" class="text-orange-400 font-bold text-xs uppercase tracking-wider mb-1">Reparo Técnico</span>
                         <h3 data-key="p4_t" data-group="4. Portfólio" data-label="Foto 4 - título" class="text-white font-bold text-lg">Carga de Gás & Placas</h3>
                         <p data-key="p4_s" data-group="4. Portfólio" data-label="Foto 4 - descrição" class="text-slate-300 text-xs mt-1">Correção de vazamentos com teste</p>
@@ -327,15 +369,15 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-                <div class="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
+                <div class="dk-card dk-line bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
                     <div>
-                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                        <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                         <p data-key="d1_txt" data-group="5. Avaliações" data-label="Avaliação 1 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"A equipe da DK Service foi extremamente atenciosa. Instalaram dois aparelhos na minha residência sem fazer um pingo de poeira. O ar tá gelando perfeitamente. Nota 10!"</p>
                     </div>
                     <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d1_ini" data-group="5. Avaliações" data-label="Avaliação 1 - iniciais" class="w-10 h-10 rounded-full bg-sky-500 font-bold flex items-center justify-center text-white text-sm">M.V.</div>
+                        <div data-key="d1_ini" data-group="5. Avaliações" data-label="Avaliação 1 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-sky-500 font-bold flex items-center justify-center text-white text-sm">M.V.</div>
                         <div>
                             <p data-key="d1_nome" data-group="5. Avaliações" data-label="Avaliação 1 - nome" class="font-bold text-white text-sm">Marcos Valério</p>
                             <p data-key="d1_cargo" data-group="5. Avaliações" data-label="Avaliação 1 - complemento" class="text-xs text-slate-400">Cliente Residencial</p>
@@ -343,15 +385,15 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
+                <div class="dk-card dk-line bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
                     <div>
-                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                        <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                         <p data-key="d2_txt" data-group="5. Avaliações" data-label="Avaliação 2 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"Chamei para fazer higienização do meu ar que estava com cheiro ruim. Fizeram a limpeza completa na bolsa coletora e o cheiro sumiu na hora. Recomendo demais!"</p>
                     </div>
                     <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d2_ini" data-group="5. Avaliações" data-label="Avaliação 2 - iniciais" class="w-10 h-10 rounded-full bg-emerald-500 font-bold flex items-center justify-center text-white text-sm">C.A.</div>
+                        <div data-key="d2_ini" data-group="5. Avaliações" data-label="Avaliação 2 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-emerald-500 font-bold flex items-center justify-center text-white text-sm">C.A.</div>
                         <div>
                             <p data-key="d2_nome" data-group="5. Avaliações" data-label="Avaliação 2 - nome" class="font-bold text-white text-sm">Carla Andrade</p>
                             <p data-key="d2_cargo" data-group="5. Avaliações" data-label="Avaliação 2 - complemento" class="text-xs text-slate-400">Sorocaba / SP</p>
@@ -359,15 +401,15 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
+                <div class="dk-card dk-line bg-slate-800/80 border border-slate-700/80 rounded-3xl p-7 shadow-lg flex flex-col justify-between reveal">
                     <div>
-                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                        <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                         <p data-key="d3_txt" data-group="5. Avaliações" data-label="Avaliação 3 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"Fechei a manutenção preventiva da minha clínica com eles. Atendimento rápido pelo WhatsApp, tiraram todas as dúvidas e o preço foi honesto."</p>
                     </div>
                     <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d3_ini" data-group="5. Avaliações" data-label="Avaliação 3 - iniciais" class="w-10 h-10 rounded-full bg-orange-500 font-bold flex items-center justify-center text-white text-sm">R.S.</div>
+                        <div data-key="d3_ini" data-group="5. Avaliações" data-label="Avaliação 3 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-orange-500 font-bold flex items-center justify-center text-white text-sm">R.S.</div>
                         <div>
                             <p data-key="d3_nome" data-group="5. Avaliações" data-label="Avaliação 3 - nome" class="font-bold text-white text-sm">Dr. Ricardo Silva</p>
                             <p data-key="d3_cargo" data-group="5. Avaliações" data-label="Avaliação 3 - complemento" class="text-xs text-slate-400">Cliente Comercial</p>
@@ -391,7 +433,7 @@
 
             <div class="space-y-4">
 
-                <details class="group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
+                <details class="dk-card dk-faq group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
                     <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
                         <span class="flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
@@ -402,7 +444,7 @@
                     <div data-key="f1_r" data-group="6. Perguntas Frequentes" data-label="Resposta 1" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Para uso residencial, recomendamos a higienização completa a cada 6 meses. Em escritórios ou locais com grande fluxo de pessoas, o ideal é realizar a manutenção preventiva a cada 2 ou 3 meses para preservar a saúde e evitar aumento no consumo de energia.</div>
                 </details>
 
-                <details class="group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
+                <details class="dk-card dk-faq group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
                     <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
                         <span class="flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
@@ -413,7 +455,7 @@
                     <div class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed"><span data-key="f2_r1" data-group="6. Perguntas Frequentes" data-label="Resposta 2 (antes do telefone)">É muito simples! Basta clicar em qualquer botão de WhatsApp da página ou pelo número</span> <strong class="text-slate-800" data-key="wpp_exibir">15 99804-8978</strong><span data-key="f2_r2" data-group="6. Perguntas Frequentes" data-label="Resposta 2 (depois do telefone)">. Se possível, envie uma foto do local ou do aparelho para que nosso técnico passe uma estimativa precisa e rápida.</span></div>
                 </details>
 
-                <details class="group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
+                <details class="dk-card dk-faq group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
                     <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
                         <span class="flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
@@ -424,7 +466,7 @@
                     <div data-key="f3_r" data-group="6. Perguntas Frequentes" data-label="Resposta 3" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Sim! Todos os serviços prestados pela DK Service possuem garantia técnica estipulada em nota/comprovante de serviço. Mantemos o compromisso com a qualidade do material e do trabalho executado.</div>
                 </details>
 
-                <details class="group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
+                <details class="dk-card dk-faq group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
                     <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
                         <span class="flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
