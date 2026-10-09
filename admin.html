@@ -254,8 +254,8 @@ let savedTexts = {}, savedImgs = {};
 let pendingText = {}, pendingImg = {}, pendingReset = new Set();
 let currentSec = 'home';
 
-const ICONS = { '0':'fa-share-nodes', '1':'fa-window-maximize', '2':'fa-rocket', '3':'fa-star', '4':'fa-images', '5':'fa-comments', '6':'fa-circle-question', '7':'fa-bullhorn', '8':'fa-table-columns' };
-const SUBS  = { '0':'WhatsApp, Facebook, Instagram e TikTok', '1':'Logo e menu de navegação', '2':'Primeira tela que o cliente vê', '3':'Por que escolher a empresa', '4':'Fotos dos trabalhos realizados', '5':'O que os clientes dizem', '6':'Dúvidas mais comuns', '7':'Convite final para contato', '8':'Informações no fim da página' };
+const ICONS = { '0':'fa-share-nodes', '1':'fa-window-maximize', '2':'fa-rocket', '3':'fa-screwdriver-wrench', '4':'fa-star', '5':'fa-images', '6':'fa-comments', '7':'fa-circle-question', '8':'fa-bullhorn', '9':'fa-table-columns' };
+const SUBS  = { '0':'WhatsApp, Facebook, Instagram e TikTok', '1':'Logo do cabeçalho', '2':'Primeira tela que o cliente vê', '3':'O que a empresa faz: serviços e benefícios', '4':'Por que escolher a empresa', '5':'Fotos dos trabalhos realizados', '6':'O que os clientes dizem', '7':'Dúvidas mais comuns', '8':'Convite final para contato', '9':'Informações no fim da página' };
 
 async function loadSchema() {
   const html = await (await fetch('index.html?_=' + Date.now())).text();

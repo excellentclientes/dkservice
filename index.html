@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DK Service - Climatização, Conforto e Soluções em Geral</title>
-    <meta name="description" content="Especialistas em climatização, instalação de ar-condicionado e soluções de conforto para sua casa ou empresa.">
+    <title>DK Service - Climatização, Elétrica, Segurança Eletrônica e Vidros</title>
+    <meta name="description" content="Refrigeração e climatização, segurança eletrônica, elétrica em geral, manutenção preventiva e corretiva, instalação de vidros e box de banheiro. Atendemos residências, comércios e indústrias.">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,6 +112,7 @@
                 </a>
 
                 <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#servicos" class="text-slate-700 hover:text-dk-cyan font-semibold text-sm transition-colors">Serviços</a>
                     <a href="#diferenciais" class="text-slate-700 hover:text-dk-cyan font-semibold text-sm transition-colors">Como Trabalhamos</a>
                     <a href="#portfolio" class="text-slate-700 hover:text-dk-cyan font-semibold text-sm transition-colors">Portfólio</a>
                     <a href="#depoimentos" class="text-slate-700 hover:text-dk-cyan font-semibold text-sm transition-colors">Avaliações</a>
@@ -134,6 +135,7 @@
         </div>
 
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3">
+            <a href="#servicos" class="mobile-link block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-50">Serviços</a>
             <a href="#diferenciais" class="mobile-link block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-50">Como Trabalhamos</a>
             <a href="#portfolio" class="mobile-link block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-50">Portfólio</a>
             <a href="#depoimentos" class="mobile-link block px-3 py-2 rounded-lg text-slate-700 font-medium hover:bg-slate-50">Avaliações</a>
@@ -231,14 +233,110 @@
         </div>
     </section>
 
+    <!-- Serviços -->
+    <section id="servicos" class="py-20 bg-white border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+                <span data-key="sv_tag" data-group="3. Serviços" data-label="Etiqueta da seção" class="text-sky-700 font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-sky-100 px-3 py-1 rounded-full inline-block mb-3">NOSSOS SERVIÇOS</span>
+                <h2 data-key="sv_titulo" data-group="3. Serviços" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-slate-900 leading-tight">Soluções completas em serviços e manutenção</h2>
+                <p data-key="sv_texto" data-group="3. Serviços" data-label="Texto da seção" class="mt-4 text-slate-600 text-base sm:text-lg">Seu conforto e segurança em boas mãos! Atendemos residências, comércios e indústrias.</p>
+            </div>
+
+            <h3 class="font-heading font-extrabold text-lg text-slate-900 mb-5 flex items-center gap-3 reveal"><span class="w-1.5 h-6 rounded bg-dk-cyan"></span><span data-key="sv_ga" data-group="3. Serviços" data-label="Grupo A: título">Climatização, Elétrica e Segurança</span></h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600 text-2xl mb-5"><i class="fa-solid fa-snowflake"></i></div>
+                    <h4 data-key="sv1_t" data-group="3. Serviços" data-label="Serviço 1 - título" class="text-lg font-bold text-slate-900 mb-2">Refrigeração e Climatização</h4>
+                    <p data-key="sv1_d" data-group="3. Serviços" data-label="Serviço 1 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Instalação, manutenção e higienização.</p>
+                </div>
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 text-2xl mb-5"><i class="fa-solid fa-video"></i></div>
+                    <h4 data-key="sv2_t" data-group="3. Serviços" data-label="Serviço 2 - título" class="text-lg font-bold text-slate-900 mb-2">Segurança Eletrônica</h4>
+                    <p data-key="sv2_d" data-group="3. Serviços" data-label="Serviço 2 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Câmeras, alarmes e sistemas de monitoramento.</p>
+                </div>
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 text-2xl mb-5"><i class="fa-solid fa-bolt"></i></div>
+                    <h4 data-key="sv3_t" data-group="3. Serviços" data-label="Serviço 3 - título" class="text-lg font-bold text-slate-900 mb-2">Elétrica em Geral</h4>
+                    <p data-key="sv3_d" data-group="3. Serviços" data-label="Serviço 3 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Instalações, reparos e adequações.</p>
+                </div>
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl mb-5"><i class="fa-solid fa-gear"></i></div>
+                    <h4 data-key="sv4_t" data-group="3. Serviços" data-label="Serviço 4 - título" class="text-lg font-bold text-slate-900 mb-2">Manutenção Preventiva e Corretiva</h4>
+                    <p data-key="sv4_d" data-group="3. Serviços" data-label="Serviço 4 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Mais durabilidade e menos imprevistos.</p>
+                </div>
+            </div>
+
+            <h3 class="font-heading font-extrabold text-lg text-slate-900 mb-1 flex items-center gap-3 reveal"><span class="w-1.5 h-6 rounded bg-dk-cyan"></span><span data-key="sv_gb" data-group="3. Serviços" data-label="Grupo B: título">Instalação de Vidros e Box de Banheiro</span></h3>
+            <p data-key="sv_gb_s" data-group="3. Serviços" data-label="Grupo B: subtítulo" class="text-slate-500 text-sm mb-5 ml-5 reveal">Mais beleza, segurança e modernidade para o seu ambiente!</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600 text-2xl mb-5"><i class="fa-solid fa-window-maximize"></i></div>
+                    <h4 data-key="sv5_t" data-group="3. Serviços" data-label="Serviço 5 - título" class="text-lg font-bold text-slate-900 mb-2">Instalação de Vidros</h4>
+                    <p data-key="sv5_d" data-group="3. Serviços" data-label="Serviço 5 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Para residências e comércios.</p>
+                </div>
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 text-2xl mb-5"><i class="fa-solid fa-shower"></i></div>
+                    <h4 data-key="sv6_t" data-group="3. Serviços" data-label="Serviço 6 - título" class="text-lg font-bold text-slate-900 mb-2">Box de Banheiro</h4>
+                    <p data-key="sv6_d" data-group="3. Serviços" data-label="Serviço 6 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Diversos modelos e acabamentos, com sofisticação e praticidade.</p>
+                </div>
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl mb-5"><i class="fa-solid fa-door-closed"></i></div>
+                    <h4 data-key="sv7_t" data-group="3. Serviços" data-label="Serviço 7 - título" class="text-lg font-bold text-slate-900 mb-2">Portas de Vidro</h4>
+                    <p data-key="sv7_d" data-group="3. Serviços" data-label="Serviço 7 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Modernidade e segurança para o seu ambiente.</p>
+                </div>
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 text-2xl mb-5"><i class="fa-solid fa-layer-group"></i></div>
+                    <h4 data-key="sv8_t" data-group="3. Serviços" data-label="Serviço 8 - título" class="text-lg font-bold text-slate-900 mb-2">Guarda-corpo de Vidro</h4>
+                    <p data-key="sv8_d" data-group="3. Serviços" data-label="Serviço 8 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Beleza e segurança com materiais de alta resistência.</p>
+                </div>
+                <div class="dk-card dk-line bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal">
+                    <div class="dk-icon w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600 text-2xl mb-5"><i class="fa-solid fa-table-columns"></i></div>
+                    <h4 data-key="sv9_t" data-group="3. Serviços" data-label="Serviço 9 - título" class="text-lg font-bold text-slate-900 mb-2">Divisórias de Ambientes</h4>
+                    <p data-key="sv9_d" data-group="3. Serviços" data-label="Serviço 9 - descrição" class="text-slate-600 text-sm sm:text-base leading-relaxed">Divisórias de vidro para separar espaços com elegância.</p>
+                </div>
+            </div>
+
+            <div class="rounded-3xl bg-gradient-to-r from-dk-navy via-dk-blue to-sky-800 text-white p-7 sm:p-9 reveal">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="flex items-center gap-3 justify-center lg:justify-start">
+                    <i class="fa-solid fa-shield-halved text-dk-cyan text-3xl"></i>
+                    <span data-key="bn1_t" data-group="3. Serviços" data-label="Benefício 1 - título" class="font-heading font-bold text-sm uppercase tracking-wide leading-tight">Qualidade e Confiança</span>
+                </div>
+                <div class="flex items-center gap-3 justify-center lg:justify-start">
+                    <i class="fa-solid fa-clock text-dk-cyan text-3xl"></i>
+                    <span data-key="bn2_t" data-group="3. Serviços" data-label="Benefício 2 - título" class="font-heading font-bold text-sm uppercase tracking-wide leading-tight">Agilidade no Atendimento</span>
+                </div>
+                <div class="flex items-center gap-3 justify-center lg:justify-start">
+                    <i class="fa-solid fa-users text-dk-cyan text-3xl"></i>
+                    <span data-key="bn3_t" data-group="3. Serviços" data-label="Benefício 3 - título" class="font-heading font-bold text-sm uppercase tracking-wide leading-tight">Equipe Especializada</span>
+                </div>
+                <div class="flex items-center gap-3 justify-center lg:justify-start">
+                    <i class="fa-solid fa-sliders text-dk-cyan text-3xl"></i>
+                    <span data-key="bn4_t" data-group="3. Serviços" data-label="Benefício 4 - título" class="font-heading font-bold text-sm uppercase tracking-wide leading-tight">Soluções Personalizadas</span>
+                </div>
+                </div>
+                <div class="mt-7 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                    <p data-key="sv_lema" data-group="3. Serviços" data-label="Frase de destaque" class="font-heading font-bold text-lg italic text-dk-ice">Manutenção é prevenção!</p>
+                    <a href="#" data-wpp="Olá! Gostaria de solicitar um orçamento." target="_blank"
+                       class="bg-green-500 hover:bg-green-400 text-white font-bold px-7 py-3 rounded-xl shadow-wpp transition-all inline-flex items-center gap-2 transform hover:-translate-y-1">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span data-key="sv_btn" data-group="3. Serviços" data-label="Botão de orçamento">Solicite seu orçamento</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Diferenciais -->
     <section id="diferenciais" class="py-20 bg-slate-50 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                <span data-key="dif_tag" data-group="3. Diferenciais" data-label="Etiqueta da seção" class="text-sky-700 font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-sky-100 px-3 py-1 rounded-full inline-block mb-3">EFICIÊNCIA & QUALIDADE</span>
-                <h2 data-key="dif_titulo" data-group="3. Diferenciais" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-slate-900 leading-tight">Por que fechar com a DK Service e não com a concorrência?</h2>
-                <p data-key="dif_texto" data-group="3. Diferenciais" data-label="Texto da seção" class="mt-4 text-slate-600 text-base sm:text-lg">Entenda como realizamos nosso trabalho para garantir que seu equipamento funcione com rendimento máximo e sem dores de cabeça futuras.</p>
+                <span data-key="dif_tag" data-group="4. Diferenciais" data-label="Etiqueta da seção" class="text-sky-700 font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-sky-100 px-3 py-1 rounded-full inline-block mb-3">EFICIÊNCIA & QUALIDADE</span>
+                <h2 data-key="dif_titulo" data-group="4. Diferenciais" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-slate-900 leading-tight">Por que fechar com a DK Service e não com a concorrência?</h2>
+                <p data-key="dif_texto" data-group="4. Diferenciais" data-label="Texto da seção" class="mt-4 text-slate-600 text-base sm:text-lg">Entenda como realizamos nosso trabalho para garantir que seu equipamento funcione com rendimento máximo e sem dores de cabeça futuras.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -246,33 +344,33 @@
                 <div class="dk-card dk-line bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
                     <div>
                         <div class="dk-icon w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600 text-2xl font-bold mb-6"><i class="fa-solid fa-microscope"></i></div>
-                        <h3 data-key="dif1_t" data-group="3. Diferenciais" data-label="Card 1 - título" class="text-xl font-bold text-slate-900 mb-3">Diagnóstico Preciso</h3>
-                        <p data-key="dif1_d" data-group="3. Diferenciais" data-label="Card 1 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Avaliamos a pressão, fluído refrigerante e componente elétrico antes de qualquer ação. Você paga apenas pelo que realmente precisa arrumar.</p>
+                        <h3 data-key="dif1_t" data-group="4. Diferenciais" data-label="Card 1 - título" class="text-xl font-bold text-slate-900 mb-3">Diagnóstico Preciso</h3>
+                        <p data-key="dif1_d" data-group="4. Diferenciais" data-label="Card 1 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Avaliamos a pressão, fluído refrigerante e componente elétrico antes de qualquer ação. Você paga apenas pelo que realmente precisa arrumar.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-bold text-sky-700 uppercase tracking-wider">
-                        <i class="fa-solid fa-check-double mr-2"></i> <span data-key="dif1_r" data-group="3. Diferenciais" data-label="Card 1 - rodapé">Sem orçamentos iludidos</span>
+                        <i class="fa-solid fa-check-double mr-2"></i> <span data-key="dif1_r" data-group="4. Diferenciais" data-label="Card 1 - rodapé">Sem orçamentos iludidos</span>
                     </div>
                 </div>
 
                 <div class="dk-card dk-line bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
                     <div>
                         <div class="dk-icon w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl font-bold mb-6"><i class="fa-solid fa-sparkles"></i></div>
-                        <h3 data-key="dif2_t" data-group="3. Diferenciais" data-label="Card 2 - título" class="text-xl font-bold text-slate-900 mb-3">Instalação & Higienização Limpa</h3>
-                        <p data-key="dif2_d" data-group="3. Diferenciais" data-label="Card 2 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Protegemos seus móveis e parede. Utilizamos bolsa colecionadora de resíduos e ferramentas com aspiração para entregar o ambiente brilhando.</p>
+                        <h3 data-key="dif2_t" data-group="4. Diferenciais" data-label="Card 2 - título" class="text-xl font-bold text-slate-900 mb-3">Instalação & Higienização Limpa</h3>
+                        <p data-key="dif2_d" data-group="4. Diferenciais" data-label="Card 2 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Protegemos seus móveis e parede. Utilizamos bolsa colecionadora de resíduos e ferramentas com aspiração para entregar o ambiente brilhando.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-bold text-emerald-700 uppercase tracking-wider">
-                        <i class="fa-solid fa-check-double mr-2"></i> <span data-key="dif2_r" data-group="3. Diferenciais" data-label="Card 2 - rodapé">Zero sujeira garantida</span>
+                        <i class="fa-solid fa-check-double mr-2"></i> <span data-key="dif2_r" data-group="4. Diferenciais" data-label="Card 2 - rodapé">Zero sujeira garantida</span>
                     </div>
                 </div>
 
                 <div class="dk-card dk-line bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200/80 reveal flex flex-col justify-between">
                     <div>
                         <div class="dk-icon w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 text-2xl font-bold mb-6"><i class="fa-solid fa-bolt"></i></div>
-                        <h3 data-key="dif3_t" data-group="3. Diferenciais" data-label="Card 3 - título" class="text-xl font-bold text-slate-900 mb-3">Economia de Energia</h3>
-                        <p data-key="dif3_d" data-group="3. Diferenciais" data-label="Card 3 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Um ar-condicionado bem limpo e instalado no nível correto consome até 30% menos energia elétrica ao atingir a temperatura rapidamente.</p>
+                        <h3 data-key="dif3_t" data-group="4. Diferenciais" data-label="Card 3 - título" class="text-xl font-bold text-slate-900 mb-3">Economia de Energia</h3>
+                        <p data-key="dif3_d" data-group="4. Diferenciais" data-label="Card 3 - texto" class="text-slate-600 text-sm sm:text-base leading-relaxed">Um ar-condicionado bem limpo e instalado no nível correto consome até 30% menos energia elétrica ao atingir a temperatura rapidamente.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-bold text-orange-700 uppercase tracking-wider">
-                        <i class="fa-solid fa-check-double mr-2"></i> <span data-key="dif3_r" data-group="3. Diferenciais" data-label="Card 3 - rodapé">Menor conta de luz</span>
+                        <i class="fa-solid fa-check-double mr-2"></i> <span data-key="dif3_r" data-group="4. Diferenciais" data-label="Card 3 - rodapé">Menor conta de luz</span>
                     </div>
                 </div>
 
@@ -286,15 +384,15 @@
 
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 reveal">
                 <div class="max-w-2xl">
-                    <span data-key="port_tag" data-group="4. Portfólio" data-label="Etiqueta da seção" class="text-sky-700 font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-sky-100 px-3 py-1 rounded-full inline-block mb-3">COMPROVAÇÃO PRÁTICA</span>
-                    <h2 data-key="port_titulo" data-group="4. Portfólio" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-slate-900 leading-tight">Nosso Trabalho na Prática</h2>
-                    <p data-key="port_texto" data-group="4. Portfólio" data-label="Texto da seção" class="mt-3 text-slate-600 text-base sm:text-lg">Confira abaixo fotos de serviços executados pela DK Service em residências, escritórios e estabelecimentos comerciais.</p>
+                    <span data-key="port_tag" data-group="5. Portfólio" data-label="Etiqueta da seção" class="text-sky-700 font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-sky-100 px-3 py-1 rounded-full inline-block mb-3">COMPROVAÇÃO PRÁTICA</span>
+                    <h2 data-key="port_titulo" data-group="5. Portfólio" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-slate-900 leading-tight">Nosso Trabalho na Prática</h2>
+                    <p data-key="port_texto" data-group="5. Portfólio" data-label="Texto da seção" class="mt-3 text-slate-600 text-base sm:text-lg">Confira abaixo fotos de serviços executados pela DK Service em residências, escritórios e estabelecimentos comerciais.</p>
                 </div>
 
                 <a href="#" data-wpp="Olá! Quero agendar um serviço semelhante ao do portfólio."
                    target="_blank"
                    class="mt-6 md:mt-0 inline-flex items-center gap-2 bg-dk-navy hover:bg-dk-blue text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md text-sm">
-                    <span data-key="port_btn" data-group="4. Portfólio" data-label="Botão da seção">Solicitar Serviço Parecido</span>
+                    <span data-key="port_btn" data-group="5. Portfólio" data-label="Botão da seção">Solicitar Serviço Parecido</span>
                     <i class="fa-solid fa-chevron-right text-xs"></i>
                 </a>
             </div>
@@ -302,54 +400,54 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 <div class="dk-card group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
-                    <img data-key="p1_img" data-type="img" data-group="4. Portfólio" data-label="Foto 1"
+                    <img data-key="p1_img" data-type="img" data-group="5. Portfólio" data-label="Foto 1"
                          src="https://images.unsplash.com/photo-1631545806603-63b71db414eb?auto=format&fit=crop&w=600&q=80"
                          alt="Instalação de Split Residencial"
                          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80';">
                     <div class="dk-cap absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
-                        <span data-key="p1_tag" data-group="4. Portfólio" data-label="Foto 1 - etiqueta" class="text-dk-cyan font-bold text-xs uppercase tracking-wider mb-1">Residencial</span>
-                        <h3 data-key="p1_t" data-group="4. Portfólio" data-label="Foto 1 - título" class="text-white font-bold text-lg">Instalação de Split Hi-Wall</h3>
-                        <p data-key="p1_s" data-group="4. Portfólio" data-label="Foto 1 - descrição" class="text-slate-300 text-xs mt-1">Acabamento com tubulação embutida</p>
+                        <span data-key="p1_tag" data-group="5. Portfólio" data-label="Foto 1 - etiqueta" class="text-dk-cyan font-bold text-xs uppercase tracking-wider mb-1">Residencial</span>
+                        <h3 data-key="p1_t" data-group="5. Portfólio" data-label="Foto 1 - título" class="text-white font-bold text-lg">Instalação de Split Hi-Wall</h3>
+                        <p data-key="p1_s" data-group="5. Portfólio" data-label="Foto 1 - descrição" class="text-slate-300 text-xs mt-1">Acabamento com tubulação embutida</p>
                     </div>
                 </div>
 
                 <div class="dk-card group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
-                    <img data-key="p2_img" data-type="img" data-group="4. Portfólio" data-label="Foto 2"
+                    <img data-key="p2_img" data-type="img" data-group="5. Portfólio" data-label="Foto 2"
                          src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
                          alt="Higienização de Ar Condicionado"
                          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80';">
                     <div class="dk-cap absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
-                        <span data-key="p2_tag" data-group="4. Portfólio" data-label="Foto 2 - etiqueta" class="text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">Manutenção</span>
-                        <h3 data-key="p2_t" data-group="4. Portfólio" data-label="Foto 2 - título" class="text-white font-bold text-lg">Higienização Química</h3>
-                        <p data-key="p2_s" data-group="4. Portfólio" data-label="Foto 2 - descrição" class="text-slate-300 text-xs mt-1">Eliminação de bactérias e fungos</p>
+                        <span data-key="p2_tag" data-group="5. Portfólio" data-label="Foto 2 - etiqueta" class="text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">Manutenção</span>
+                        <h3 data-key="p2_t" data-group="5. Portfólio" data-label="Foto 2 - título" class="text-white font-bold text-lg">Higienização Química</h3>
+                        <p data-key="p2_s" data-group="5. Portfólio" data-label="Foto 2 - descrição" class="text-slate-300 text-xs mt-1">Eliminação de bactérias e fungos</p>
                     </div>
                 </div>
 
                 <div class="dk-card group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
-                    <img data-key="p3_img" data-type="img" data-group="4. Portfólio" data-label="Foto 3"
+                    <img data-key="p3_img" data-type="img" data-group="5. Portfólio" data-label="Foto 3"
                          src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80"
                          alt="Infraestrutura Comercial"
                          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1631545806603-63b71db414eb?auto=format&fit=crop&w=600&q=80';">
                     <div class="dk-cap absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
-                        <span data-key="p3_tag" data-group="4. Portfólio" data-label="Foto 3 - etiqueta" class="text-sky-400 font-bold text-xs uppercase tracking-wider mb-1">Comercial</span>
-                        <h3 data-key="p3_t" data-group="4. Portfólio" data-label="Foto 3 - título" class="text-white font-bold text-lg">Projeto de Climatização</h3>
-                        <p data-key="p3_s" data-group="4. Portfólio" data-label="Foto 3 - descrição" class="text-slate-300 text-xs mt-1">Sistemas centrais para empresas</p>
+                        <span data-key="p3_tag" data-group="5. Portfólio" data-label="Foto 3 - etiqueta" class="text-sky-400 font-bold text-xs uppercase tracking-wider mb-1">Comercial</span>
+                        <h3 data-key="p3_t" data-group="5. Portfólio" data-label="Foto 3 - título" class="text-white font-bold text-lg">Projeto de Climatização</h3>
+                        <p data-key="p3_s" data-group="5. Portfólio" data-label="Foto 3 - descrição" class="text-slate-300 text-xs mt-1">Sistemas centrais para empresas</p>
                     </div>
                 </div>
 
                 <div class="dk-card group relative rounded-2xl overflow-hidden shadow-md bg-slate-900 reveal">
-                    <img data-key="p4_img" data-type="img" data-group="4. Portfólio" data-label="Foto 4"
+                    <img data-key="p4_img" data-type="img" data-group="5. Portfólio" data-label="Foto 4"
                          src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80"
                          alt="Assistência Técnica e Diagnóstico"
                          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80';">
                     <div class="dk-cap absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90 p-6 flex flex-col justify-end">
-                        <span data-key="p4_tag" data-group="4. Portfólio" data-label="Foto 4 - etiqueta" class="text-orange-400 font-bold text-xs uppercase tracking-wider mb-1">Reparo Técnico</span>
-                        <h3 data-key="p4_t" data-group="4. Portfólio" data-label="Foto 4 - título" class="text-white font-bold text-lg">Carga de Gás & Placas</h3>
-                        <p data-key="p4_s" data-group="4. Portfólio" data-label="Foto 4 - descrição" class="text-slate-300 text-xs mt-1">Correção de vazamentos com teste</p>
+                        <span data-key="p4_tag" data-group="5. Portfólio" data-label="Foto 4 - etiqueta" class="text-orange-400 font-bold text-xs uppercase tracking-wider mb-1">Reparo Técnico</span>
+                        <h3 data-key="p4_t" data-group="5. Portfólio" data-label="Foto 4 - título" class="text-white font-bold text-lg">Carga de Gás & Placas</h3>
+                        <p data-key="p4_s" data-group="5. Portfólio" data-label="Foto 4 - descrição" class="text-slate-300 text-xs mt-1">Correção de vazamentos com teste</p>
                     </div>
                 </div>
 
@@ -362,9 +460,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                <span data-key="dep_tag" data-group="5. Avaliações" data-label="Etiqueta da seção" class="text-dk-cyan font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full inline-block mb-3">AVALIAÇÕES REAIS</span>
-                <h2 data-key="dep_titulo" data-group="5. Avaliações" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-white leading-tight">O que dizem os clientes que fecharam com a gente</h2>
-                <p data-key="dep_texto" data-group="5. Avaliações" data-label="Texto da seção" class="mt-3 text-slate-300 text-base sm:text-lg">A reputação da DK Service é construída com transparência e satisfação em cada atendimento.</p>
+                <span data-key="dep_tag" data-group="6. Avaliações" data-label="Etiqueta da seção" class="text-dk-cyan font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full inline-block mb-3">AVALIAÇÕES REAIS</span>
+                <h2 data-key="dep_titulo" data-group="6. Avaliações" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-white leading-tight">O que dizem os clientes que fecharam com a gente</h2>
+                <p data-key="dep_texto" data-group="6. Avaliações" data-label="Texto da seção" class="mt-3 text-slate-300 text-base sm:text-lg">A reputação da DK Service é construída com transparência e satisfação em cada atendimento.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -374,13 +472,13 @@
                         <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
-                        <p data-key="d1_txt" data-group="5. Avaliações" data-label="Avaliação 1 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"A equipe da DK Service foi extremamente atenciosa. Instalaram dois aparelhos na minha residência sem fazer um pingo de poeira. O ar tá gelando perfeitamente. Nota 10!"</p>
+                        <p data-key="d1_txt" data-group="6. Avaliações" data-label="Avaliação 1 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"A equipe da DK Service foi extremamente atenciosa. Instalaram dois aparelhos na minha residência sem fazer um pingo de poeira. O ar tá gelando perfeitamente. Nota 10!"</p>
                     </div>
                     <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d1_ini" data-group="5. Avaliações" data-label="Avaliação 1 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-sky-500 font-bold flex items-center justify-center text-white text-sm">M.V.</div>
+                        <div data-key="d1_ini" data-group="6. Avaliações" data-label="Avaliação 1 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-sky-500 font-bold flex items-center justify-center text-white text-sm">M.V.</div>
                         <div>
-                            <p data-key="d1_nome" data-group="5. Avaliações" data-label="Avaliação 1 - nome" class="font-bold text-white text-sm">Marcos Valério</p>
-                            <p data-key="d1_cargo" data-group="5. Avaliações" data-label="Avaliação 1 - complemento" class="text-xs text-slate-400">Cliente Residencial</p>
+                            <p data-key="d1_nome" data-group="6. Avaliações" data-label="Avaliação 1 - nome" class="font-bold text-white text-sm">Marcos Valério</p>
+                            <p data-key="d1_cargo" data-group="6. Avaliações" data-label="Avaliação 1 - complemento" class="text-xs text-slate-400">Cliente Residencial</p>
                         </div>
                     </div>
                 </div>
@@ -390,13 +488,13 @@
                         <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
-                        <p data-key="d2_txt" data-group="5. Avaliações" data-label="Avaliação 2 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"Chamei para fazer higienização do meu ar que estava com cheiro ruim. Fizeram a limpeza completa na bolsa coletora e o cheiro sumiu na hora. Recomendo demais!"</p>
+                        <p data-key="d2_txt" data-group="6. Avaliações" data-label="Avaliação 2 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"Chamei para fazer higienização do meu ar que estava com cheiro ruim. Fizeram a limpeza completa na bolsa coletora e o cheiro sumiu na hora. Recomendo demais!"</p>
                     </div>
                     <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d2_ini" data-group="5. Avaliações" data-label="Avaliação 2 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-emerald-500 font-bold flex items-center justify-center text-white text-sm">C.A.</div>
+                        <div data-key="d2_ini" data-group="6. Avaliações" data-label="Avaliação 2 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-emerald-500 font-bold flex items-center justify-center text-white text-sm">C.A.</div>
                         <div>
-                            <p data-key="d2_nome" data-group="5. Avaliações" data-label="Avaliação 2 - nome" class="font-bold text-white text-sm">Carla Andrade</p>
-                            <p data-key="d2_cargo" data-group="5. Avaliações" data-label="Avaliação 2 - complemento" class="text-xs text-slate-400">Sorocaba / SP</p>
+                            <p data-key="d2_nome" data-group="6. Avaliações" data-label="Avaliação 2 - nome" class="font-bold text-white text-sm">Carla Andrade</p>
+                            <p data-key="d2_cargo" data-group="6. Avaliações" data-label="Avaliação 2 - complemento" class="text-xs text-slate-400">Sorocaba / SP</p>
                         </div>
                     </div>
                 </div>
@@ -406,13 +504,13 @@
                         <div class="dk-stars flex text-amber-400 gap-1 mb-4 text-sm">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
-                        <p data-key="d3_txt" data-group="5. Avaliações" data-label="Avaliação 3 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"Fechei a manutenção preventiva da minha clínica com eles. Atendimento rápido pelo WhatsApp, tiraram todas as dúvidas e o preço foi honesto."</p>
+                        <p data-key="d3_txt" data-group="6. Avaliações" data-label="Avaliação 3 - texto" class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-6">"Fechei a manutenção preventiva da minha clínica com eles. Atendimento rápido pelo WhatsApp, tiraram todas as dúvidas e o preço foi honesto."</p>
                     </div>
                     <div class="flex items-center gap-3 pt-4 border-t border-slate-700">
-                        <div data-key="d3_ini" data-group="5. Avaliações" data-label="Avaliação 3 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-orange-500 font-bold flex items-center justify-center text-white text-sm">R.S.</div>
+                        <div data-key="d3_ini" data-group="6. Avaliações" data-label="Avaliação 3 - iniciais" class="dk-avatar w-10 h-10 rounded-full bg-orange-500 font-bold flex items-center justify-center text-white text-sm">R.S.</div>
                         <div>
-                            <p data-key="d3_nome" data-group="5. Avaliações" data-label="Avaliação 3 - nome" class="font-bold text-white text-sm">Dr. Ricardo Silva</p>
-                            <p data-key="d3_cargo" data-group="5. Avaliações" data-label="Avaliação 3 - complemento" class="text-xs text-slate-400">Cliente Comercial</p>
+                            <p data-key="d3_nome" data-group="6. Avaliações" data-label="Avaliação 3 - nome" class="font-bold text-white text-sm">Dr. Ricardo Silva</p>
+                            <p data-key="d3_cargo" data-group="6. Avaliações" data-label="Avaliação 3 - complemento" class="text-xs text-slate-400">Cliente Comercial</p>
                         </div>
                     </div>
                 </div>
@@ -426,9 +524,9 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="text-center mb-14 reveal">
-                <span data-key="faq_tag" data-group="6. Perguntas Frequentes" data-label="Etiqueta da seção" class="text-sky-700 font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-sky-100 px-3 py-1 rounded-full inline-block mb-3">TIRA-DÚVIDAS</span>
-                <h2 data-key="faq_titulo" data-group="6. Perguntas Frequentes" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-slate-900">Perguntas Frequentes</h2>
-                <p data-key="faq_texto" data-group="6. Perguntas Frequentes" data-label="Texto da seção" class="mt-3 text-slate-600 text-base">Clique na pergunta para ver a resposta correspondente.</p>
+                <span data-key="faq_tag" data-group="7. Perguntas Frequentes" data-label="Etiqueta da seção" class="text-sky-700 font-extrabold text-xs sm:text-sm tracking-widest uppercase bg-sky-100 px-3 py-1 rounded-full inline-block mb-3">TIRA-DÚVIDAS</span>
+                <h2 data-key="faq_titulo" data-group="7. Perguntas Frequentes" data-label="Título da seção" class="text-3xl sm:text-4xl font-heading font-black text-slate-900">Perguntas Frequentes</h2>
+                <p data-key="faq_texto" data-group="7. Perguntas Frequentes" data-label="Texto da seção" class="mt-3 text-slate-600 text-base">Clique na pergunta para ver a resposta correspondente.</p>
             </div>
 
             <div class="space-y-4">
@@ -437,44 +535,55 @@
                     <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
                         <span class="flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
-                            <span data-key="f1_p" data-group="6. Perguntas Frequentes" data-label="Pergunta 1">Com que frequência devo fazer a higienização do meu ar-condicionado?</span>
+                            <span data-key="f1_p" data-group="7. Perguntas Frequentes" data-label="Pergunta 1">Com que frequência devo fazer a higienização do meu ar-condicionado?</span>
                         </span>
                         <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center group-open:bg-sky-600 group-open:text-white transition-all"><i class="fa-solid fa-plus group-open:rotate-45 transition-transform"></i></span>
                     </summary>
-                    <div data-key="f1_r" data-group="6. Perguntas Frequentes" data-label="Resposta 1" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Para uso residencial, recomendamos a higienização completa a cada 6 meses. Em escritórios ou locais com grande fluxo de pessoas, o ideal é realizar a manutenção preventiva a cada 2 ou 3 meses para preservar a saúde e evitar aumento no consumo de energia.</div>
+                    <div data-key="f1_r" data-group="7. Perguntas Frequentes" data-label="Resposta 1" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Para uso residencial, recomendamos a higienização completa a cada 6 meses. Em escritórios ou locais com grande fluxo de pessoas, o ideal é realizar a manutenção preventiva a cada 2 ou 3 meses para preservar a saúde e evitar aumento no consumo de energia.</div>
                 </details>
 
                 <details class="dk-card dk-faq group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
                     <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
                         <span class="flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
-                            <span data-key="f2_p" data-group="6. Perguntas Frequentes" data-label="Pergunta 2">Como faço para solicitar um orçamento pelo WhatsApp?</span>
+                            <span data-key="f2_p" data-group="7. Perguntas Frequentes" data-label="Pergunta 2">Como faço para solicitar um orçamento pelo WhatsApp?</span>
                         </span>
                         <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center group-open:bg-sky-600 group-open:text-white transition-all"><i class="fa-solid fa-plus group-open:rotate-45 transition-transform"></i></span>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed"><span data-key="f2_r1" data-group="6. Perguntas Frequentes" data-label="Resposta 2 (antes do telefone)">É muito simples! Basta clicar em qualquer botão de WhatsApp da página ou pelo número</span> <strong class="text-slate-800" data-key="wpp_exibir">15 99804-8978</strong><span data-key="f2_r2" data-group="6. Perguntas Frequentes" data-label="Resposta 2 (depois do telefone)">. Se possível, envie uma foto do local ou do aparelho para que nosso técnico passe uma estimativa precisa e rápida.</span></div>
+                    <div class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed"><span data-key="f2_r1" data-group="7. Perguntas Frequentes" data-label="Resposta 2 (antes do telefone)">É muito simples! Basta clicar em qualquer botão de WhatsApp da página ou pelo número</span> <strong class="text-slate-800" data-key="wpp_exibir">15 99804-8978</strong><span data-key="f2_r2" data-group="7. Perguntas Frequentes" data-label="Resposta 2 (depois do telefone)">. Se possível, envie uma foto do local ou do aparelho para que nosso técnico passe uma estimativa precisa e rápida.</span></div>
                 </details>
 
                 <details class="dk-card dk-faq group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
                     <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
                         <span class="flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
-                            <span data-key="f3_p" data-group="6. Perguntas Frequentes" data-label="Pergunta 3">O serviço de instalação ou conserto possui garantia?</span>
+                            <span data-key="f3_p" data-group="7. Perguntas Frequentes" data-label="Pergunta 3">O serviço de instalação ou conserto possui garantia?</span>
                         </span>
                         <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center group-open:bg-sky-600 group-open:text-white transition-all"><i class="fa-solid fa-plus group-open:rotate-45 transition-transform"></i></span>
                     </summary>
-                    <div data-key="f3_r" data-group="6. Perguntas Frequentes" data-label="Resposta 3" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Sim! Todos os serviços prestados pela DK Service possuem garantia técnica estipulada em nota/comprovante de serviço. Mantemos o compromisso com a qualidade do material e do trabalho executado.</div>
+                    <div data-key="f3_r" data-group="7. Perguntas Frequentes" data-label="Resposta 3" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Sim! Todos os serviços prestados pela DK Service possuem garantia técnica estipulada em nota/comprovante de serviço. Mantemos o compromisso com a qualidade do material e do trabalho executado.</div>
                 </details>
 
                 <details class="dk-card dk-faq group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
                     <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
                         <span class="flex items-center gap-3">
                             <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
-                            <span data-key="f4_p" data-group="6. Perguntas Frequentes" data-label="Pergunta 4">Vocês atendem todas as marcas de ar-condicionado?</span>
+                            <span data-key="f4_p" data-group="7. Perguntas Frequentes" data-label="Pergunta 4">Vocês atendem todas as marcas de ar-condicionado?</span>
                         </span>
                         <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center group-open:bg-sky-600 group-open:text-white transition-all"><i class="fa-solid fa-plus group-open:rotate-45 transition-transform"></i></span>
                     </summary>
-                    <div data-key="f4_r" data-group="6. Perguntas Frequentes" data-label="Resposta 4" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Atendemos todas as principais marcas do mercado: LG, Samsung, Midea, Gree, Daikin, Carrier, Consul, Springer e Fujitsu, tanto em modelos Inverter quanto convencionais.</div>
+                    <div data-key="f4_r" data-group="7. Perguntas Frequentes" data-label="Resposta 4" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Atendemos todas as principais marcas do mercado: LG, Samsung, Midea, Gree, Daikin, Carrier, Consul, Springer e Fujitsu, tanto em modelos Inverter quanto convencionais.</div>
+                </details>
+
+                <details class="dk-card dk-faq group bg-white border border-slate-200 rounded-2xl shadow-sm transition-all duration-300 reveal">
+                    <summary class="p-6 flex justify-between items-center font-bold text-base sm:text-lg text-slate-900 cursor-pointer list-none select-none hover:text-sky-700">
+                        <span class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-question text-sky-600 text-xl"></i>
+                            <span data-key="f5_p" data-group="7. Perguntas Frequentes" data-label="Pergunta 5">Quais serviços a DK Service oferece?</span>
+                        </span>
+                        <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center group-open:bg-sky-600 group-open:text-white transition-all"><i class="fa-solid fa-plus group-open:rotate-45 transition-transform"></i></span>
+                    </summary>
+                    <div data-key="f5_r" data-group="7. Perguntas Frequentes" data-label="Resposta 5" class="px-6 pb-6 text-slate-600 text-sm sm:text-base border-t border-slate-100 pt-4 leading-relaxed">Refrigeração e climatização, segurança eletrônica (câmeras, alarmes e monitoramento), elétrica em geral, manutenção preventiva e corretiva, além de instalação de vidros e box de banheiro. Atendemos residências, comércios e indústrias.</div>
                 </details>
 
             </div>
@@ -484,13 +593,13 @@
     <!-- CTA Final -->
     <section class="py-16 bg-gradient-to-br from-dk-navy via-dk-blue to-sky-900 text-white text-center relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-4 relative z-10 reveal">
-            <h2 data-key="cta_t" data-group="7. Chamada Final" data-label="Título" class="text-3xl sm:text-4xl font-heading font-black mb-4">Pronto para garantir seu conforto térmico hoje?</h2>
-            <p data-key="cta_d" data-group="7. Chamada Final" data-label="Texto" class="text-slate-200 text-base sm:text-lg mb-8 max-w-2xl mx-auto">Não arrisque seu aparelho com curiosos. Fale direto com a equipe técnica da DK Service pelo WhatsApp.</p>
+            <h2 data-key="cta_t" data-group="8. Chamada Final" data-label="Título" class="text-3xl sm:text-4xl font-heading font-black mb-4">Pronto para garantir seu conforto térmico hoje?</h2>
+            <p data-key="cta_d" data-group="8. Chamada Final" data-label="Texto" class="text-slate-200 text-base sm:text-lg mb-8 max-w-2xl mx-auto">Não arrisque seu aparelho com curiosos. Fale direto com a equipe técnica da DK Service pelo WhatsApp.</p>
             <a href="#" data-wpp="Olá! Gostaria de agendar um serviço de climatização."
                target="_blank"
                class="bg-green-500 hover:bg-green-400 text-white font-bold px-9 py-4 rounded-2xl shadow-wpp hover:scale-105 transition-all inline-flex items-center gap-3 text-lg">
                 <i class="fa-brands fa-whatsapp text-2xl"></i>
-                <span data-key="cta_btn" data-group="7. Chamada Final" data-label="Botão">Agendar Atendimento via WhatsApp</span>
+                <span data-key="cta_btn" data-group="8. Chamada Final" data-label="Botão">Agendar Atendimento via WhatsApp</span>
             </a>
         </div>
     </section>
@@ -501,8 +610,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
 
                 <div>
-                    <img data-key="logo_rodape" data-type="img" data-group="8. Rodapé" data-label="Logo do rodapé (PNG transparente)" src="logorodape.png" alt="DK Service" class="h-20 w-auto object-contain block mb-4" onerror="this.style.display='none'">
-                    <p data-key="rod_sobre" data-group="8. Rodapé" data-label="Descrição" class="text-xs sm:text-sm leading-relaxed text-slate-400">Climatização & Serviços. Conforto e soluções em geral para residências, comércios e indústrias.</p>
+                    <img data-key="logo_rodape" data-type="img" data-group="9. Rodapé" data-label="Logo do rodapé (PNG transparente)" src="logorodape.png" alt="DK Service" class="h-20 w-auto object-contain block mb-4" onerror="this.style.display='none'">
+                    <p data-key="rod_sobre" data-group="9. Rodapé" data-label="Descrição" class="text-xs sm:text-sm leading-relaxed text-slate-400">Climatização, segurança eletrônica, elétrica em geral e instalação de vidros e box. Atendemos residências, comércios e indústrias.</p>
 
                     <!-- Redes sociais -->
                     <div class="flex items-center gap-3 mt-5">
@@ -526,7 +635,7 @@
                 </div>
 
                 <div>
-                    <h4 data-key="rod_contato_t" data-group="8. Rodapé" data-label="Título da coluna contato" class="text-white font-bold text-sm uppercase tracking-wider mb-3">Contato Direto</h4>
+                    <h4 data-key="rod_contato_t" data-group="9. Rodapé" data-label="Título da coluna contato" class="text-white font-bold text-sm uppercase tracking-wider mb-3">Contato Direto</h4>
                     <ul class="space-y-2 text-xs sm:text-sm">
                         <li class="flex items-center gap-2">
                             <i class="fa-brands fa-whatsapp text-green-400 text-base"></i>
@@ -534,7 +643,7 @@
                         </li>
                         <li class="flex items-center gap-2">
                             <i class="fa-solid fa-location-dot text-sky-400"></i>
-                            <span data-key="rod_local" data-group="8. Rodapé" data-label="Localização / área de atendimento">Atendimento Regional Especializado</span>
+                            <span data-key="rod_local" data-group="9. Rodapé" data-label="Localização / área de atendimento">Atendimento Regional Especializado</span>
                         </li>
                     </ul>
                 </div>
@@ -542,6 +651,7 @@
                 <div>
                     <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-3">Links Rápidos</h4>
                     <div class="flex flex-col space-y-1.5 text-xs sm:text-sm">
+                        <a href="#servicos" class="hover:text-white transition-colors">Nossos Serviços</a>
                         <a href="#diferenciais" class="hover:text-white transition-colors">Como Trabalhamos</a>
                         <a href="#portfolio" class="hover:text-white transition-colors">Portfólio de Fotos</a>
                         <a href="#depoimentos" class="hover:text-white transition-colors">Avaliações</a>
