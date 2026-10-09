@@ -650,6 +650,33 @@
             document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
         }
 
+        // Links do menu: rolam até a seção SEM colocar "#secao" na barra de endereço
+        (function () {
+            const goTo = (id, smooth) => {
+                const t = id && document.getElementById(id);
+                if (!t) return false;
+                const hd = document.getElementById('main-header');
+                const y = t.getBoundingClientRect().top + window.scrollY - (hd ? hd.offsetHeight : 0) + 1;
+                window.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
+                return true;
+            };
+            const clean = () => { if (location.hash) history.replaceState(null, '', location.pathname + location.search); };
+            document.addEventListener('click', e => {
+                const a = e.target.closest('a[href^="#"]');
+                if (!a) return;
+                const id = a.getAttribute('href').slice(1);
+                if (!id) return;                       // href="#" (botões de WhatsApp) não mexe
+                e.preventDefault();
+                if (id === 'inicio') window.scrollTo({ top: 0, behavior: 'smooth' }); else goTo(id, true);
+                clean();
+            });
+            // Se alguém abrir um link antigo com #portfolio, rola e limpa o endereço
+            window.addEventListener('load', () => {
+                const id = location.hash.slice(1);
+                if (id) { setTimeout(() => { goTo(id, false); clean(); }, 150); }
+            });
+        })();
+
         // Revelar no scroll
         const revealElements = document.querySelectorAll('.reveal');
         const revealOnScroll = new IntersectionObserver((entries, observer) => {
