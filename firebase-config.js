@@ -13,5 +13,5 @@ export const firebaseConfig = {
 // E-mails (Google) autorizados a entrar no painel.
 // IMPORTANTE: a mesma lista deve estar nas regras do Firestore (veja as instruções).
 export const ADMIN_EMAILS = [
-  "excellentservices.excel@gmail.com"
+  "comercialdkservice@gmail.com"
 ];
