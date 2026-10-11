@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B192C">
 <meta name="robots" content="noindex, nofollow">
 <title>Painel DK Service</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,12 +14,16 @@
   :root { --navy:#0B192C; --navy2:#102338; --blue:#1E3A8A; --cyan:#00B4D8; --bg:#eef2f7; --line:#e2e8f0; --txt:#0f172a; --mut:#64748b; }
   * { box-sizing:border-box; }
   html,body { height:100%; }
+  html { -webkit-text-size-adjust:100%; }
+  body { overflow-x:hidden; -webkit-tap-highlight-color:transparent; }
+  img { max-width:100%; }
   body { margin:0; font-family:Inter,system-ui,sans-serif; background:var(--bg); color:var(--txt); }
   .hidden { display:none !important; }
+  .menu-btn, .side-x, .scrim { display:none; }
   h1,h2,h3 { font-family:Montserrat,Inter,sans-serif; }
 
   /* ---------- LOGIN ---------- */
-  .login { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; padding:24px; position:relative; overflow:hidden;
+  .login { min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; padding:24px; position:relative; overflow:hidden;
     background:radial-gradient(circle at 15% 10%, rgba(0,180,216,.35), transparent 45%), radial-gradient(circle at 90% 90%, rgba(30,58,138,.7), transparent 50%), #060d18; }
   .login::before { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size:26px 26px; pointer-events:none; }
   .login .brand { position:relative; }
@@ -105,6 +110,9 @@
   .field label .dot { width:8px; height:8px; border-radius:50%; background:#f59e0b; display:none; }
   .field.changed label .dot { display:block; }
   .field .row { display:flex; gap:8px; align-items:flex-start; }
+  .field .row input, .field .row textarea { min-width:0; flex:1; }
+  .card, .field, .rv { min-width:0; }
+  .field label span { overflow-wrap:anywhere; }
   input[type=text], input[type=url], textarea { width:100%; padding:12px 13px; border:1.5px solid #dbe3ee; border-radius:12px; font:500 14px Inter,sans-serif; color:var(--txt); background:#f8fafc; transition:border-color .15s, background .15s, box-shadow .15s; }
   input:hover, textarea:hover { border-color:#b9c7da; }
   input:focus, textarea:focus { outline:0; border-color:var(--cyan); background:#fff; box-shadow:0 0 0 4px rgba(0,180,216,.15); }
@@ -158,19 +166,72 @@
   @keyframes blink { 50% { opacity:.25; } }
   .sec-t { font:800 13px Montserrat,sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); margin:0 0 14px; }
 
+  /* ---------- CELULAR / TABLET ---------- */
   @media (max-width: 900px) {
-    .stage { height:520px; }
-    .app { grid-template-columns:1fr; }
-    aside.side { position:relative; height:auto; flex-direction:column; padding:12px; }
-    .side .logo { padding-bottom:10px; margin-bottom:8px; } .side .logo img { height:48px; }
-    .side .lbl, .side .bottom .user { display:none; }
-    .nav { flex-direction:row; overflow-x:auto; padding-bottom:6px; }
-    .nav button { white-space:nowrap; width:auto; flex:none; padding:9px 12px; }
-    .side .bottom { margin-top:6px; padding-top:8px; }
-    .topbar { padding:12px 16px; position:relative; }
-    main { padding:18px 14px 80px; }
+    .app { display:block; min-height:100vh; min-height:100dvh; }
+    .content { min-height:100vh; min-height:100dvh; }
+
+    /* menu lateral vira gaveta */
+    aside.side { position:fixed; top:0; left:0; bottom:0; height:100vh; height:100dvh; width:min(310px,86vw); z-index:80; padding:18px 14px calc(16px + env(safe-area-inset-bottom)); transform:translateX(-105%); transition:transform .28s ease; box-shadow:none; overscroll-behavior:contain; }
+    aside.side.open { transform:none; box-shadow:20px 0 60px rgba(0,0,0,.45); }
+    .side .logo { padding:4px 40px 16px 6px; }
+    .side .logo img { height:52px; }
+    .side-x { display:flex; align-items:center; justify-content:center; position:absolute; top:14px; right:12px; width:38px; height:38px; border:0; border-radius:10px; background:rgba(255,255,255,.1); color:#fff; font-size:16px; cursor:pointer; }
+    .nav button { padding:10px 12px; min-height:50px; }
+    .nav .badge { flex:none; }
+    .scrim { display:block; position:fixed; inset:0; z-index:70; background:rgba(6,13,24,.55); opacity:0; pointer-events:none; transition:opacity .25s; }
+    .scrim.show { opacity:1; pointer-events:auto; }
+    body.lock { overflow:hidden; }
+
+    /* barra superior em duas linhas */
+    .topbar { position:sticky; top:0; padding:calc(10px + env(safe-area-inset-top)) 14px 10px; display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; grid-template-areas:"menu ttl ttl save" "st st pv op"; gap:8px 10px; align-items:center; }
+    .menu-btn { grid-area:menu; display:flex; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid var(--line); background:#fff; color:var(--navy); border-radius:12px; font-size:17px; cursor:pointer; }
+    .topbar .ttl { grid-area:ttl; min-width:0; }
+    .topbar h2 { font-size:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .topbar .sub { font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    #saveBtn { grid-area:save; height:44px; padding:0 14px; }
+    .status { grid-area:st; font-size:12.5px; min-width:0; }
+    #prevBtn { grid-area:pv; } #openBtn { grid-area:op; }
+    #prevBtn, #openBtn { width:44px; height:40px; padding:0; justify-content:center; }
+    #prevBtn .lb, #openBtn .lb { display:none; }
+
+    main { padding:16px 14px calc(90px + env(safe-area-inset-bottom)); max-width:none; }
     .grid { grid-template-columns:1fr; }
-    .hero { padding:24px; }
+    .card { padding:16px; border-radius:18px; margin-bottom:14px; }
+    .card > h4 { margin-bottom:14px; }
+
+    /* campos fáceis de tocar (16px evita o zoom do iPhone) */
+    input[type=text], input[type=url], textarea, .rv select { font-size:16px; padding:13px; }
+    .rst { height:48px; width:46px; }
+    textarea { min-height:110px; }
+    .rv { padding:12px; }
+    .rv-h .b .btn { width:40px; height:40px; padding:0; justify-content:center; }
+    .rv-acts .btn, .imgfield .acts .btn { flex:1; justify-content:center; min-height:44px; }
+    .imgfield .drop { min-height:140px; }
+    .imgfield .acts { flex-wrap:wrap; }
+
+    /* visão geral: site ao vivo */
+    .stage { height:calc(100vh - 230px); height:calc(100dvh - 230px); min-height:420px; }
+    .live { border-radius:18px; }
+    .live .bar { padding:10px 12px; gap:10px; }
+    .live .dots, .live .url { display:none; }
+    .live .tag { margin-right:auto; }
+    .seg button .lb { display:none; }
+    .seg button { padding:8px 14px; font-size:14px; }
+    .live .rl { width:38px; height:38px; }
+
+    /* pré-visualização em tela cheia */
+    .preview { width:100vw; height:100vh; height:100dvh; box-shadow:none; }
+    .preview .ph { padding:calc(10px + env(safe-area-inset-top)) 14px 10px; }
+    .preview .ph button { width:40px; height:40px; }
+
+    .toast { bottom:calc(16px + env(safe-area-inset-bottom)); max-width:calc(100vw - 28px); width:max-content; padding:12px 16px; font-size:13.5px; }
+  }
+  @media (max-width: 480px) {
+    .login { padding:18px; gap:20px; }
+    .login .brand img { height:110px; }
+    .login form { padding:28px 20px 24px; border-radius:20px; }
+    .login h1 { font-size:21px; }
   }
 </style>
 </head>
@@ -193,7 +254,8 @@
 
 <!-- PAINEL -->
 <div id="panel" class="app hidden">
-  <aside class="side">
+  <aside class="side" id="side">
+    <button class="side-x" id="sideX" aria-label="Fechar menu"><i class="fa-solid fa-xmark"></i></button>
     <div class="logo"><img src="logoadmin.png" alt="DK Service" onerror="this.style.display='none'"></div>
     <div class="lbl">Seções do site</div>
     <nav class="nav" id="nav"></nav>
@@ -205,15 +267,18 @@
 
   <div class="content">
     <div class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu"><i class="fa-solid fa-bars"></i></button>
       <div class="ttl"><h2 id="secTitle">Visão geral</h2><div class="sub" id="secSub">Escolha uma seção para editar</div></div>
       <div class="status" id="status"><i class="fa-solid fa-circle-check"></i> Tudo salvo</div>
-      <button class="btn btn-ghost" id="prevBtn"><i class="fa-solid fa-eye"></i> Pré-visualizar</button>
-      <a class="btn btn-ghost" href="index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir site</a>
-      <button class="btn btn-save" id="saveBtn" disabled><i class="fa-solid fa-floppy-disk"></i> <span id="saveTxt">Salvar alterações</span></button>
+      <button class="btn btn-ghost" id="prevBtn" aria-label="Pré-visualizar"><i class="fa-solid fa-eye"></i><span class="lb"> Pré-visualizar</span></button>
+      <a class="btn btn-ghost" id="openBtn" href="index.html" target="_blank" aria-label="Abrir site"><i class="fa-solid fa-arrow-up-right-from-square"></i><span class="lb"> Abrir site</span></a>
+      <button class="btn btn-save" id="saveBtn" disabled><i class="fa-solid fa-floppy-disk"></i> <span id="saveTxt">Salvar</span></button>
     </div>
     <main id="main"></main>
   </div>
 </div>
+
+<div class="scrim" id="scrim"></div>
 
 <div class="preview" id="preview">
   <div class="ph"><span><i class="fa-solid fa-eye"></i>&nbsp; Site ao vivo</span><button id="prevClose"><i class="fa-solid fa-xmark"></i></button></div>
@@ -311,19 +376,20 @@ function pushPreview() {
 document.addEventListener('load', e => { if (e.target.tagName === 'IFRAME') pushPreview(); }, true);
 
 // Ajusta o site dentro da moldura (computador = escala 1280px; celular = 390px)
-let homeMode = 'desktop';
+let homeMode = window.matchMedia('(max-width:900px)').matches ? 'mobile' : 'desktop';
 function fitHome() {
   const stage = $('stage'), fr = $('homeFrame'); if (!stage || !fr) return;
   const H = stage.clientHeight || 640;
   stage.classList.toggle('mobile', homeMode === 'mobile');
   if (homeMode === 'mobile') {
-    fr.style.width = '390px'; fr.style.height = (H - 24) + 'px'; fr.style.transform = 'translateX(-50%)';
+    const w = Math.min(390, (stage.clientWidth || 390) - 24); fr.style.width = w + 'px'; fr.style.height = (H - 24) + 'px'; fr.style.transform = 'translateX(-50%)';
   } else {
     const s = (stage.clientWidth || 1280) / 1280;
     fr.style.width = '1280px'; fr.style.height = (H / s) + 'px'; fr.style.transform = `scale(${s})`;
   }
 }
 window.addEventListener('resize', fitHome);
+window.addEventListener('orientationchange', () => setTimeout(fitHome, 200));
 
 // Faz o site (pré-visualização) rolar até o item que está sendo editado
 let lastKey = null;
@@ -358,7 +424,7 @@ function build() {
         <div class="dots"><i></i><i></i><i></i></div>
         <div class="url"><i class="fa-solid fa-lock"></i><span>${location.host}</span></div>
         <span class="tag">Ao vivo</span>
-        <div class="seg"><button class="on" data-m="desktop"><i class="fa-solid fa-desktop"></i> Computador</button><button data-m="mobile"><i class="fa-solid fa-mobile-screen"></i> Celular</button></div>
+        <div class="seg"><button class="${homeMode === 'desktop' ? 'on' : ''}" data-m="desktop" aria-label="Computador"><i class="fa-solid fa-desktop"></i><span class="lb"> Computador</span></button><button class="${homeMode === 'mobile' ? 'on' : ''}" data-m="mobile" aria-label="Celular"><i class="fa-solid fa-mobile-screen"></i><span class="lb"> Celular</span></button></div>
         <button class="rl" title="Recarregar"><i class="fa-solid fa-rotate"></i></button>
       </div>
       <div class="stage" id="stage"><iframe id="homeFrame" src="index.html" title="Site ao vivo"></iframe></div>
@@ -394,7 +460,16 @@ function build() {
   refresh();
 }
 
+// gaveta do menu (celular)
+const setMenu = open => { $('side').classList.toggle('open', open); $('scrim').classList.toggle('show', open); document.body.classList.toggle('lock', open); };
+$('menuBtn').addEventListener('click', () => setMenu(true));
+$('sideX').addEventListener('click', () => setMenu(false));
+$('scrim').addEventListener('click', () => setMenu(false));
+window.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+window.addEventListener('resize', () => { if (window.innerWidth > 900) setMenu(false); });
+
 function go(id) {
+  setMenu(false);
   currentSec = id;
   document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'sec-' + id));
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('active', b.dataset.sec === id));
@@ -503,7 +578,7 @@ function refresh() {
     bd.textContent = n; bd.classList.toggle('hidden', !n);
   });
   $('saveBtn').disabled = !total;
-  $('saveTxt').textContent = total ? `Salvar alterações (${total})` : 'Salvar alterações';
+  $('saveTxt').textContent = total ? `Salvar (${total})` : 'Salvar';
   const st = $('status');
   st.className = 'status' + (total ? ' dirty' : ' ok');
   st.innerHTML = total ? '<i class="fa-solid fa-circle-exclamation"></i> Alterações não salvas' : '<i class="fa-solid fa-circle-check"></i> Tudo salvo';
